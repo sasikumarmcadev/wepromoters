@@ -482,13 +482,13 @@ const OurWork = () => {
                         'w-[120px] xs:w-[140px] sm:w-32 md:w-40 lg:w-48 opacity-70 cursor-pointer hover:opacity-80'}`}
                     onClick={() => !isCenterVideo ? goToSlide(videoIndex) : handleVideoTap()}
                   >
-                    <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full">
+                    <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full video-container">
                       <video 
                         ref={el => setVideoRef(el, videoIndex)}
                         playsInline
                         loop
                         preload="auto"
-                        className="w-full h-full object-cover rounded-xl"
+                        className="w-full h-full object-cover rounded-xl video-with-inner-shadow"
                       >
                         <source src={videos[videoIndex].src} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -554,13 +554,13 @@ const OurWork = () => {
                               'z-10 w-[200px] xs:w-[240px] sm:w-56 md:w-72 lg:w-80' : 
                               'w-[120px] xs:w-[140px] sm:w-32 md:w-40 lg:w-48 opacity-70'}`}
                         >
-                          <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full">
+                          <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full video-container">
                             <video 
                               ref={displayIndex === (isMobile ? 0 : 1) ? setIncomingVideoRef : null}
                               playsInline
                               loop
                               preload="auto"
-                              className="w-full h-full object-cover rounded-xl"
+                              className="w-full h-full object-cover rounded-xl video-with-inner-shadow"
                             >
                               <source src={videos[correctVideoIndex].src} type="video/mp4" />
                               Your browser does not support the video tag.
@@ -606,6 +606,16 @@ const OurWork = () => {
                   object-fit: cover;
                   width: 100%;
                   height: 100%;
+                }
+                
+                .video-with-inner-shadow {
+                  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.3);
+                }
+                
+                .video-container {
+                  position: relative;
+                  border-radius: 12px;
+                  overflow: hidden;
                 }
                 
                 .carousel-container {

@@ -74,19 +74,19 @@ const Contact = () => {
                   <div className="bg-gray-100 p-3 rounded-full">
                     <MapPin className="w-6 h-6 text-gray-800" />
                   </div>
-                  <span className="text-gray-700">123 Business Street, London, UK</span>
+                  <span className="text-gray-700">GK Nagar, 2nd St, Manthithoppu rd, Kovilpatti, Tamil Nadu 628501</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="bg-gray-100 p-3 rounded-full">
                     <Phone className="w-6 h-6 text-gray-800" />
                   </div>
-                  <span className="text-gray-700">+44 (0) 123 456 7890</span>
+                  <span className="text-gray-700">+91 63748 76357</span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="bg-gray-100 p-3 rounded-full">
                     <Mail className="w-6 h-6 text-gray-800" />
                   </div>
-                  <span className="text-gray-700">contact@example.com</span>
+                  <span className="text-gray-700">wepromoters23@gmail.com</span>
                 </div>
               </div>
             </div>

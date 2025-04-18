@@ -36,7 +36,7 @@ const About: React.FC = () => {
   useEffect(() => {
     if (!isVisible) return;
 
-    const targets = [8, 26, 30, 100];
+    const targets = [1, 26, 30, 100];
     const duration = 2000; // 2 seconds
     const steps = 60;
     const interval = duration / steps;
@@ -67,10 +67,10 @@ const About: React.FC = () => {
 
   const stats = [
     {
-      target: '8',
+      target: '1',
       current: Math.round(counters[0]),
       label: 'Years experience',
-      description: 'Improving homes with expert craftsmanship for years',
+      description: 'Experienced in social media marketing and help businesses grow their online presence with strategy',
     },
     {
       target: '26',
@@ -78,12 +78,12 @@ const About: React.FC = () => {
       label: 'Projects completed',
       description: 'Over 250 successful projects delivered with quality and care',
     },
-    {
-      target: '30',
-      current: Math.round(counters[2]),
-      label: 'Skilled Tradespeople',
-      description: 'Our team of 30 experts ensures top-quality results',
-    },
+    // {
+    //   target: '30',
+    //   current: Math.round(counters[2]),
+    //   label: 'Skilled Tradespeople',
+    //   description: 'Our team of 30 experts ensures top-quality results',
+    // },
     {
       target: '100%',
       current: Math.round(counters[3]) + '%',
@@ -93,41 +93,41 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" className="bg-gray-100"  ref={sectionRef}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <section id="about" className="bg-gray-100 w-full" ref={sectionRef}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
         {/* Header Section */}
-        <div className="mb-8 overflow-hidden">
+        <div className="mb-6 md:mb-8 overflow-hidden">
           <div className={`transition-all duration-1000 ease-out ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
-            <button className="bg-gray-900 text-white text-sm font-medium px-4 py-2 rounded-full">
+            <button className="bg-gray-900 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
               About us
             </button>
           </div>
           
           <div className={`transition-all duration-1000 ease-out delay-200 ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mt-4 mb-4 sm:mb-6">
-            Digital Marketing Specialists
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 md:mt-4 mb-3 sm:mb-4 md:mb-6">
+              Digital Marketing Specialists
             </h2>
           </div>
           
           <div className={`transition-all duration-1000 ease-out delay-400 ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
-            <p className="text-base sm:text-lg text-gray-700 max-w-5xl">
-            Welcome to We Promoters, your trusted digital marketing experts, dedicated to transforming brands with strategy and creativity. With the real experience in SEO, social media marketing, content creation, and paid advertising, we take pride in delivering data-driven results and a seamless client experience. Our mission is to bring your brand's vision to life through clear communication, innovative strategies, and expert guidance every step of the way. Let's grow your online presence and drive real results!
+            <p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-5xl">
+              Welcome to We Promoters, your trusted digital marketing experts, dedicated to transforming brands with strategy and creativity. With the real experience in SEO, social media marketing, content creation, and paid advertising, we take pride in delivering data-driven results and a seamless client experience. Our mission is to bring your brand's vision to life through clear communication, innovative strategies, and expert guidance every step of the way. Let's grow your online presence and drive real results!
             </p>
           </div>
         </div>
 
         {/* Stats Section */}
-        <div className="py-8 sm:py-12">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+        <div className="py-6 sm:py-8 md:py-12">
+          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <div 
                 key={index} 
-                className={`text-center transition-all duration-1000 ease-out overflow-hidden ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}
+                className={`text-center p-4 sm:p-6 bg-gray rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ease-out overflow-hidden ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}
                 style={{ transitionDelay: `${600 + index * 150}ms` }}
               >
-                <div className="text-4xl sm:text-5xl font-bold text-gray-900 mb-2">{stat.current}</div>
-                <div className="text-lg sm:text-xl font-semibold text-gray-900 mb-2">{stat.label}</div>
-                <p className="text-sm sm:text-base text-gray-600">{stat.description}</p>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">{stat.current}</div>
+                <div className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">{stat.label}</div>
+                <p className="text-xs sm:text-sm md:text-base text-gray-600">{stat.description}</p>
               </div>
             ))}
           </div>
