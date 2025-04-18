@@ -13,7 +13,6 @@ const OurWork = () => {
   const animationTimeoutRef = useRef<number | null>(null);
   const resetAnimationTimeoutRef = useRef<number | null>(null);
   const playbackTimeoutRef = useRef<number | null>(null);
-  // Use incomingIndex in the incoming video element below
   const [incomingIndex, setIncomingIndex] = useState<number | null>(null);
 
   const videos = [
@@ -51,10 +50,44 @@ const OurWork = () => {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892465/Matchbox_lm6oqk.mp4",
       title: "E-commerce Solutions",
       description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892687/hay2_suoqrj.mp4",
+      title: "E-commerce Solutions",
+      description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892724/Gym1_ujpu4l.mp4",
+      title: "E-commerce Solutions",
+      description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892830/Mahal1_muzl8t.mp4",
+      title: "E-commerce Solutions",
+      description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892966/kailaash1_pgtaen.mp4",
+      title: "E-commerce Solutions",
+      description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744893225/Kailaash2_sxc5bm.mp4",
+      title: "E-commerce Solutions",
+      description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744893259/gym2_ngsfnq.mp4",
+      title: "E-commerce Solutions",
+      description: ""
+    },
+    {
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744893333/catering2_ohqgt0.mp4",
+      title: "E-commerce Solutions",
+      description: ""
     }
   ];
 
-  // Enhanced safe play method with mobile-specific handling - wrapped in useCallback
   const safePlayVideo = useCallback((videoElement: HTMLVideoElement | null) => {
     if (!videoElement || !hasUserInteracted) return;
 
@@ -64,15 +97,13 @@ const OurWork = () => {
 
     playbackTimeoutRef.current = setTimeout(() => {
       if (videoElement.paused) {
-        videoElement.muted = true;
         videoElement.setAttribute('playsinline', 'true');
-        videoElement.setAttribute('webkit-playsinline', 'true'); // Additional iOS compatibility
+        videoElement.setAttribute('webkit-playsinline', 'true');
         videoElement.preload = 'auto';
 
         if (videoElement.readyState >= 2) {
           videoElement.play().catch((error) => {
             console.error("Video play failed:", error);
-            // Fallback: Reload source and retry
             videoElement.load();
             videoElement.play().catch(() => {
               console.warn("Retry play failed, likely low-power mode or restrictions");
@@ -86,13 +117,12 @@ const OurWork = () => {
             videoElement.removeEventListener('canplay', handleCanPlay);
           };
           videoElement.addEventListener('canplay', handleCanPlay);
-          videoElement.load(); // Ensure source is loaded
+          videoElement.load();
         }
       }
     }, 50);
   }, [hasUserInteracted]);
 
-  // Enhanced safe pause method - wrapped in useCallback
   const safePauseVideo = useCallback((videoElement: HTMLVideoElement | null) => {
     if (!videoElement) return;
 
@@ -195,7 +225,6 @@ const OurWork = () => {
 
   const getOrderedVideos = () => {
     const numVideos = videos.length;
-    // In mobile view (when screen width < 640px), show only two videos
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
     
     if (isMobile) {
@@ -344,7 +373,6 @@ const OurWork = () => {
     isSwipingRef.current = true;
     swipeDeltaRef.current = 0;
     
-    // Apply initial styles for smooth transition
     if (carouselContainerRef.current) {
       carouselContainerRef.current.style.transition = 'none';
       requestAnimationFrame(() => updateSwipePosition());
@@ -357,27 +385,21 @@ const OurWork = () => {
     touchEndX.current = e.touches[0].clientX;
     touchCurrentX.current = e.touches[0].clientX;
     
-    // Calculate delta between start and current position
     swipeDeltaRef.current = touchCurrentX.current - touchStartX.current;
     
-    // If we have a valid swipe, prevent default to avoid page scrolling
     if (Math.abs(swipeDeltaRef.current) > 10) {
       e.preventDefault();
     }
-    
-    // Let the animation frame handle the actual movement
   };
 
   const updateSwipePosition = () => {
     if (!isSwipingRef.current) return;
     
     if (carouselContainerRef.current) {
-      // Apply transform with damping effect (80% of the actual movement)
       const dampedDelta = swipeDeltaRef.current * 0.8;
       carouselContainerRef.current.style.transform = `translateX(${dampedDelta}px)`;
     }
     
-    // Continue animation loop
     requestAnimationFrame(() => updateSwipePosition());
   };
 
@@ -386,15 +408,13 @@ const OurWork = () => {
     isSwipingRef.current = false;
     
     const difference = touchStartX.current - touchEndX.current;
-    const threshold = 50; // minimum distance to trigger swipe
+    const threshold = 50;
     
-    // Reset the transform with smooth transition
     if (carouselContainerRef.current) {
       carouselContainerRef.current.style.transition = 'transform 300ms ease-out';
       carouselContainerRef.current.style.transform = 'translateX(0)';
     }
     
-    // Check if the swipe was significant enough to change slides
     if (Math.abs(difference) > threshold) {
       if (difference > 0) {
         nextVideo();
@@ -402,7 +422,6 @@ const OurWork = () => {
         prevVideo();
       }
     } else {
-      // If swipe wasn't significant, treat as a tap
       handleVideoTap();
     }
   };
@@ -410,7 +429,6 @@ const OurWork = () => {
   const setVideoRef = (el: HTMLVideoElement | null, index: number) => {
     if (el) {
       el.playsInline = true;
-      el.muted = true;
       el.loop = true;
       el.preload = "auto";
 
@@ -418,23 +436,17 @@ const OurWork = () => {
         videoRefs.current[index] = el;
         el.setAttribute('playsinline', 'true');
         el.setAttribute('webkit-playsinline', 'true');
-        el.setAttribute('muted', 'true');
-        el.muted = true;
       }
     }
   };
 
-  // Use this function to set the incoming video reference
   const setIncomingVideoRef = (el: HTMLVideoElement | null) => {
     if (el) {
       el.playsInline = true;
-      el.muted = true;
       el.loop = true;
       el.preload = "auto";
       el.setAttribute('playsinline', 'true');
       el.setAttribute('webkit-playsinline', 'true');
-      el.setAttribute('muted', 'true');
-      el.muted = true;
       incomingVideoRef.current = el;
     }
   };
@@ -466,15 +478,14 @@ const OurWork = () => {
                     key={videoIndex} 
                     className={`overflow-hidden rounded-xl shadow-lg transition-transform duration-500 ease-out relative
                       ${isCenterVideo ? 
-                        'z-10 w-[160px] xs:w-[200px] sm:w-56 md:w-72 lg:w-80 cursor-pointer' : 
-                        'w-[96px] xs:w-[120px] sm:w-32 md:w-40 lg:w-48 opacity-70 cursor-pointer hover:opacity-80'}`}
+                        'z-10 w-[200px] xs:w-[240px] sm:w-56 md:w-72 lg:w-80 cursor-pointer' : 
+                        'w-[120px] xs:w-[140px] sm:w-32 md:w-40 lg:w-48 opacity-70 cursor-pointer hover:opacity-80'}`}
                     onClick={() => !isCenterVideo ? goToSlide(videoIndex) : handleVideoTap()}
                   >
-                    <div className="relative aspect-[10/16] w-full">
+                    <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full">
                       <video 
                         ref={el => setVideoRef(el, videoIndex)}
                         playsInline
-                        muted 
                         loop
                         preload="auto"
                         className="w-full h-full object-cover rounded-xl"
@@ -493,7 +504,6 @@ const OurWork = () => {
                         </div>
                       )}
                       
-                      {/* Single line title inside the video */}
                       <div className="absolute bottom-2 left-0 right-0 px-2 text-center">
                         <h5 className="text-white text-xs xs:text-sm truncate font-medium drop-shadow-lg text-shadow">{videos[videoIndex].title}</h5>
                       </div>
@@ -541,14 +551,13 @@ const OurWork = () => {
                           key={`incoming-${correctVideoIndex}`} 
                           className={`overflow-hidden rounded-xl shadow-lg transition-transform duration-500 ease-out
                             ${isCenterVideo ? 
-                              'z-10 w-[160px] xs:w-[200px] sm:w-56 md:w-72 lg:w-80' : 
-                              'w-[96px] xs:w-[120px] sm:w-32 md:w-40 lg:w-48 opacity-70'}`}
+                              'z-10 w-[200px] xs:w-[240px] sm:w-56 md:w-72 lg:w-80' : 
+                              'w-[120px] xs:w-[140px] sm:w-32 md:w-40 lg:w-48 opacity-70'}`}
                         >
-                          <div className="relative aspect-[10/16] w-full">
+                          <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full">
                             <video 
                               ref={displayIndex === (isMobile ? 0 : 1) ? setIncomingVideoRef : null}
                               playsInline
-                              muted 
                               loop
                               preload="auto"
                               className="w-full h-full object-cover rounded-xl"
@@ -567,7 +576,6 @@ const OurWork = () => {
                               </div>
                             )}
                             
-                            {/* Single line title for the incoming slides */}
                             <div className="absolute bottom-2 left-0 right-0 px-2 text-center">
                               <h5 className="text-white text-xs xs:text-sm truncate font-medium drop-shadow-lg text-shadow">{videos[correctVideoIndex].title}</h5>
                             </div>
@@ -615,6 +623,9 @@ const OurWork = () => {
                   video {
                     border-radius: 12px;
                   }
+                  .aspect-[10\\/16] {
+                    aspect-ratio: 10 / 18;
+                  }
                 }
                 
                 @media (min-width: 640px) {
@@ -623,13 +634,12 @@ const OurWork = () => {
                   }
                 }
                 
-                /* Smooth swipe animation styles */
                 .swipe-container {
                   transition: transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
                 }
                 
                 .swipe-item {
-                  transition: transform 300ms ease, opacity 300ms ease;
+                  transition: transform telephone 300ms ease, opacity 300ms ease;
                 }
                 
                 .swipe-active {
@@ -637,7 +647,6 @@ const OurWork = () => {
                   transition: transform 300ms ease;
                 }
                 
-                /* Text shadow effect for better readability */
                 .text-shadow {
                   text-shadow: 0 2px 4px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.7);
                 }
@@ -652,32 +661,14 @@ const OurWork = () => {
                 e.stopPropagation();
                 prevVideo();
               }}
-              className="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-600 transition-colors mr-4 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              className="bg-gray-800 text-white p-2 sm:p-3 rounded-full hover:bg-gray-600 transition-colors mr-4 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-400"
               aria-label="Previous video"
               disabled={isAnimating}
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
-            
-            <div className="flex space-x-3">
-              {videos.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={e => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    goToSlide(index);
-                  }}
-                  className={`h-3 rounded-full transition-all ${
-                    index === currentIndex ? 'w-8 bg-gray-800' : 'w-3 bg-gray-300 hover:bg-gray-400'
-                  } ${isAnimating ? 'pointer-events-none' : ''}`}
-                  aria-label={`Go to slide ${index + 1}`}
-                  disabled={isAnimating}
-                />
-              ))}
-            </div>
             
             <button 
               onClick={e => {
@@ -685,19 +676,19 @@ const OurWork = () => {
                 e.stopPropagation();
                 nextVideo();
               }}
-              className="bg-gray-800 text-white p-3 rounded-full hover:bg-gray-600 transition-colors ml-4 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-400"
+              className="bg-gray-800 text-white p-2 sm:p-3 rounded-full hover:bg-gray-600 transition-colors ml-4 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-gray-400"
               aria-label="Next video"
               disabled={isAnimating}
             >
-              <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
           </div>
           
-          <div className="text-center mt-4 text-gray-500 text-sm">
+          {/* <div className="text-center mt-4 text-gray-500 text-sm">
             <p>← Swipe or use arrows to navigate →</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
