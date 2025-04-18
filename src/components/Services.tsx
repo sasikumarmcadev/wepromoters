@@ -7,7 +7,6 @@ const Services = () => {
       icon: Share2,
       title: 'Social Media Marketing',
       description: 'This service transformation brought engaging content and enhanced visibility to our client\'s brand. We implemented custom strategies, high-quality visuals, and state-of-the-art analytics, creating a stylish yet practical approach perfect for audience engagement and growth. With attention to every detail, we delivered social media presence that balances aesthetics and performance.',
-      duration: '4 weeks',
       category: 'Marketing',
       image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
     },
@@ -15,7 +14,6 @@ const Services = () => {
       icon: FileText,
       title: 'Content Marketing',
       description: 'Our content marketing service delivers compelling storytelling and enhanced searchability to our client\'s digital presence. We crafted custom articles, high-quality visuals, and state-of-the-art SEO strategies, creating valuable content perfect for audience education and conversion. With meticulous research and creative development, we established a content library that balances information and engagement.',
-      duration: '6 weeks',
       category: 'Content',
       image: "https://images.unsplash.com/photo-1543286386-2e659306cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
     },
@@ -23,7 +21,6 @@ const Services = () => {
       icon: MessageSquare,
       title: 'Influencer Marketing',
       description: 'This influencer campaign brought authentic advocacy and enhanced credibility to our client\'s products. We partnered with custom-selected creators, high-quality production support, and state-of-the-art tracking systems, creating genuine promotions perfect for reaching targeted audiences. With careful vetting and relationship management, we delivered partnerships that balance promotional goals and creator authenticity.',
-      duration: '8 weeks',
       category: 'Influencer',
       image: "https://images.unsplash.com/photo-1567721913486-6585f069b332?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
     },
@@ -31,7 +28,6 @@ const Services = () => {
       icon: Globe,
       title: 'Online Public Relations',
       description: 'Our PR transformation established positive narratives and enhanced reputation for our client\'s brand. We developed custom media relationships, high-quality press materials, and state-of-the-art monitoring tools, creating a strategic approach perfect for crisis prevention and opportunity maximization. With comprehensive planning and proactive outreach, we delivered PR solutions that balance protection and promotion.',
-      duration: '4 weeks',
       category: 'PR',
       image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
     },
@@ -39,7 +35,6 @@ const Services = () => {
       icon: MousePointer,
       title: 'Pay-Per-Click Advertising',
       description: 'This PPC campaign brought targeted visibility and enhanced conversion rates to our client\'s offerings. We implemented custom audience targeting, high-quality ad creative, and state-of-the-art bid management, creating efficient campaigns perfect for immediate traffic and sales generation. With continuous optimization and performance analysis, we delivered advertising that balances cost efficiency and revenue growth.',
-      duration: '3 weeks',
       category: 'PPC',
       image: "https://images.unsplash.com/photo-1607703703674-df96af81dffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=80"
     },

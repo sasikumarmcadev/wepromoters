@@ -78,7 +78,7 @@ const OurWork = () => {
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983968/gym2_qtqtui.mp4",
-      title: "Stoplight",
+      title: "Spotlight",
       description: ""
     }
   ].filter(video => video.src && video.src.trim() !== "");
