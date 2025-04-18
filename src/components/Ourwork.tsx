@@ -17,72 +17,67 @@ const OurWork = () => {
 
   const videos = [
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963080/classicpolo1_krfdgo.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983639/Hay1_sro3eb.mp4",
       title: "Social Media Strategy",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963108/Hay1_yafzuq.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981765/classicpolo1_xo89m0.mp4",
       title: "Creative Process",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963093/Gym1_xhyz9b.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981741/Maris_shoe_vfd6jg.mp4",
       title: "Data Analytics",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963123/hay2_q4r61o.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981767/Rubpeshwar1_f6hqmi.mp4",
       title: "Brand Development",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964003/kailaash1_zjxyre.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981775/catering1_mxiewd.mp4",
       title: "Content Production",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964009/Kailaash2_zwbmfh.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981823/kailaash1_hquwp1.mp4",
       title: "Digital Marketing",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964018/Maris1_dswfmn.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981837/Mahal1_p2okrh.mp4",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964038/Rubpeshwar1_nxsu5s.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983669/hay2_tgmdfs.mp4",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964054/Matchbox_wliodz.webm",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983695/jockey1_fqqakt.mp4",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892830/Mahal1_muzl8t.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983751/catering2_ccedue.mp4",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892966/kailaash1_pgtaen.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983788/catering3_d2fwe4.mp4",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744893225/Kailaash2_sxc5bm.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983937/Gym1_rzg2de.mp4",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744893259/gym2_ngsfnq.mp4",
-      title: "E-commerce Solutions",
-      description: ""
-    },
-    {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744893333/catering2_ohqgt0.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983968/gym2_qtqtui.mp4",
       title: "E-commerce Solutions",
       description: ""
     }
