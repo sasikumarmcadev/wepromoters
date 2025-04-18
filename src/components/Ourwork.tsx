@@ -18,67 +18,67 @@ const OurWork = () => {
   const videos = [
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983639/Hay1_sro3eb.mp4",
-      title: "Social Media Strategy",
+      title: "Ad shoot",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981765/classicpolo1_xo89m0.mp4",
-      title: "Creative Process",
+      title: "Indoor shoot",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981741/Maris_shoe_vfd6jg.mp4",
-      title: "Data Analytics",
+      title: "Product shoot",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981767/Rubpeshwar1_f6hqmi.mp4",
-      title: "Brand Development",
+      title: "Spotlight",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981775/catering1_mxiewd.mp4",
-      title: "Content Production",
+      title: "Event shoot",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981823/kailaash1_hquwp1.mp4",
-      title: "Digital Marketing",
+      title: "Branding",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744981837/Mahal1_p2okrh.mp4",
-      title: "E-commerce Solutions",
+      title: "Branding",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983669/hay2_tgmdfs.mp4",
-      title: "E-commerce Solutions",
+      title: "Ad shoot",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983695/jockey1_fqqakt.mp4",
-      title: "E-commerce Solutions",
+      title: "Ad shoot",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983751/catering2_ccedue.mp4",
-      title: "E-commerce Solutions",
+      title: "Branding",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983788/catering3_d2fwe4.mp4",
-      title: "E-commerce Solutions",
+      title: "Branding",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983937/Gym1_rzg2de.mp4",
-      title: "E-commerce Solutions",
+      title: "Interior",
       description: ""
     },
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983968/gym2_qtqtui.mp4",
-      title: "E-commerce Solutions",
+      title: "Stoplight",
       description: ""
     }
   ].filter(video => video.src && video.src.trim() !== "");
