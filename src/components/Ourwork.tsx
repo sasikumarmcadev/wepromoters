@@ -81,7 +81,7 @@ const OurWork = () => {
       title: "E-commerce Solutions",
       description: ""
     }
-  ];
+  ].filter(video => video.src && video.src.trim() !== "");
 
   const safePlayVideo = useCallback((videoElement: HTMLVideoElement | null) => {
     if (!videoElement || !hasUserInteracted) return;
@@ -448,6 +448,9 @@ const OurWork = () => {
 
   const orderedIndices = getOrderedVideos();
 
+  // Only render videos with valid sources
+  const validOrderedIndices = orderedIndices.filter(index => videos[index] && videos[index].src);
+
   return (
     <section id="work" className="bg-white" ref={sectionRef}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -465,7 +468,7 @@ const OurWork = () => {
               onTouchEnd={handleTouchEnd}
               ref={carouselContainerRef}
             >
-              {orderedIndices.map((videoIndex, displayIndex) => {
+              {validOrderedIndices.map((videoIndex, displayIndex) => {
                 const isCenterVideo = typeof window !== 'undefined' && window.innerWidth >= 640 ? displayIndex === 1 : displayIndex === 0;
                 
                 return (
@@ -517,6 +520,7 @@ const OurWork = () => {
                   }}
                 >
                   {getOrderedVideos()
+                    .filter(index => videos[index] && videos[index].src)
                     .map((_, displayIndex) => {
                       const nextIndex = slideDirection === 'left' 
                         ? (currentIndex + 1) % videos.length
@@ -536,6 +540,16 @@ const OurWork = () => {
                           nextIndex,
                           (nextIndex + 1) % videos.length
                         ];
+                      }
+                      
+                      // Filter out invalid video indices
+                      orderedIndicesForNextSlide = orderedIndicesForNextSlide.filter(
+                        idx => videos[idx] && videos[idx].src
+                      );
+                      
+                      // Check if the display index is within bounds
+                      if (displayIndex >= orderedIndicesForNextSlide.length) {
+                        return null;
                       }
                       
                       const correctVideoIndex = orderedIndicesForNextSlide[displayIndex];
