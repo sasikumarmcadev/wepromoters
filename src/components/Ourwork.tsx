@@ -17,47 +17,47 @@ const OurWork = () => {
 
   const videos = [
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744802701/catering1_weltav.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963080/classicpolo1_krfdgo.webm",
       title: "Social Media Strategy",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744799345/Maris_shoe_fqgb45.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963108/Hay1_yafzuq.webm",
       title: "Creative Process",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744806710/Jockey1_vjkptn.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963093/Gym1_xhyz9b.webm",
       title: "Data Analytics",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744803027/Rubpeshwar1_vf8swa.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744963123/hay2_q4r61o.webm",
       title: "Brand Development",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744802943/classicpolo1_w0iyh2.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964003/kailaash1_zjxyre.webm",
       title: "Content Production",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744806724/Hay1_mmxird.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964009/Kailaash2_zwbmfh.webm",
       title: "Digital Marketing",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892465/Matchbox_lm6oqk.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964018/Maris1_dswfmn.webm",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892687/hay2_suoqrj.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964038/Rubpeshwar1_nxsu5s.webm",
       title: "E-commerce Solutions",
       description: ""
     },
     {
-      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744892724/Gym1_ujpu4l.mp4",
+      src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744964054/Matchbox_wliodz.webm",
       title: "E-commerce Solutions",
       description: ""
     },
@@ -482,13 +482,13 @@ const OurWork = () => {
                         'w-[120px] xs:w-[140px] sm:w-32 md:w-40 lg:w-48 opacity-70 cursor-pointer hover:opacity-80'}`}
                     onClick={() => !isCenterVideo ? goToSlide(videoIndex) : handleVideoTap()}
                   >
-                    <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full video-container">
+                    <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full video-bottom-shadow">
                       <video 
                         ref={el => setVideoRef(el, videoIndex)}
                         playsInline
                         loop
                         preload="auto"
-                        className="w-full h-full object-cover rounded-xl video-with-inner-shadow"
+                        className="w-full h-full object-cover rounded-xl"
                       >
                         <source src={videos[videoIndex].src} type="video/mp4" />
                         Your browser does not support the video tag.
@@ -554,13 +554,13 @@ const OurWork = () => {
                               'z-10 w-[200px] xs:w-[240px] sm:w-56 md:w-72 lg:w-80' : 
                               'w-[120px] xs:w-[140px] sm:w-32 md:w-40 lg:w-48 opacity-70'}`}
                         >
-                          <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full video-container">
+                          <div className="relative aspect-[10/16] sm:aspect-[10/16] w-full video-bottom-shadow">
                             <video 
                               ref={displayIndex === (isMobile ? 0 : 1) ? setIncomingVideoRef : null}
                               playsInline
                               loop
                               preload="auto"
-                              className="w-full h-full object-cover rounded-xl video-with-inner-shadow"
+                              className="w-full h-full object-cover rounded-xl"
                             >
                               <source src={videos[correctVideoIndex].src} type="video/mp4" />
                               Your browser does not support the video tag.
@@ -608,14 +608,21 @@ const OurWork = () => {
                   height: 100%;
                 }
                 
-                .video-with-inner-shadow {
-                  box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5), inset 0 0 5px rgba(0, 0, 0, 0.3);
+                .video-bottom-shadow {
+                  position: relative;
+                  overflow: hidden;
                 }
                 
-                .video-container {
-                  position: relative;
-                  border-radius: 12px;
-                  overflow: hidden;
+                .video-bottom-shadow::after {
+                  content: '';
+                  position: absolute;
+                  bottom: 0;
+                  left: 0;
+                  right: 0;
+                  height: 4px;
+                  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+                  z-index: 1;
+                  pointer-events: none;
                 }
                 
                 .carousel-container {

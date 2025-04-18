@@ -80,13 +80,13 @@ const Contact = () => {
                   <div className="bg-gray-100 p-3 rounded-full">
                     <Phone className="w-6 h-6 text-gray-800" />
                   </div>
-                  <span className="text-gray-700">+91 63748 76357</span>
+                  <span className="text-gray-700"><a href="tel:+6374876357">+91 63748 76357</a></span>
                 </div>
                 <div className="flex items-center space-x-4">
                   <div className="bg-gray-100 p-3 rounded-full">
                     <Mail className="w-6 h-6 text-gray-800" />
                   </div>
-                  <span className="text-gray-700">wepromoters23@gmail.com</span>
+                  <span className="text-gray-700"><a href="mailto:wepromoters23@gmail.com">wepromoters23@gmail.com</a></span>
                 </div>
               </div>
             </div>
@@ -96,16 +96,16 @@ const Contact = () => {
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
                   <p className="font-medium text-gray-900">Monday - Friday</p>
-                  <p className="text-gray-600">9:00 AM - 6:00 PM</p>
+                  <p className="text-gray-600">9:00 AM - 10:00 PM</p>
                 </div>
                 <div className="flex justify-between items-center">
-                  <p className="font-medium text-gray-900">Saturday</p>
-                  <p className="text-gray-600">10:00 AM - 4:00 PM</p>
+                  <p className="font-medium text-gray-900">Saturday & Sunday</p>
+                  <p className="text-gray-600">10:00 AM - 6:00 PM</p>
                 </div>
-                <div className="flex justify-between items-center">
+                {/* <div className="flex justify-between items-center">
                   <p className="font-medium text-gray-900">Sunday</p>
                   <p className="text-gray-600">Closed</p>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
