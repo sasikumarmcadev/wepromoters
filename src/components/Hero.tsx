@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 const Hero = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -134,18 +135,21 @@ const Hero = () => {
             <p id="fade-description" className="text-base sm:text-lg text-gray-200 mb-8 sm:mb-12 opacity-0 max-w-full">
               We help brands stand out with smart, scalable and digital marketing strategies. From Startups to Top performers - We promote what matters.
             </p>
+            <a href="#work">
             <div className="flex justify-center">
-              <button className="bg-black border border-gray-600 text-white px-6 py-3 sm:px-8 sm:py-4 rounded-full flex items-center space-x-2 hover:bg-gray-900 transition-colors group relative overflow-hidden">
-                <span className="relative z-10 transition-colors duration-500 group-hover:text-gray-800 text-sm sm:text-base">Work with us</span>
-                <div className="relative z-10">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5 transition-colors duration-500 group-hover:text-gray-800" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-500 ease-out"></div>
-                </div>
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-white rounded-full transform scale-0 group-hover:scale-150 transition-transform duration-700 ease-out"></div>
-              </button>
+              {/* New styled button replacing the previous one */}
+              <StyledWrapper>
+                <button className="flex items-center space-x-2" id="#work">
+                  <span>View our works</span>
+                  <span className="relative transition-all duration-300 group-hover:translate-x-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
+                  </span>
+                </button>
+              </StyledWrapper>
             </div>
+            </a>
           </div>
         </div>
       </div>
@@ -160,6 +164,27 @@ const Hero = () => {
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes gradient {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        
+        @keyframes shine {
+          0% { transform: translateX(-100%); }
+          100% { transform: translateX(100%); }
+        }
+        
+        .animate-gradient-x {
+          background-size: 200% 200%;
+          animation: gradient 3s ease infinite;
+        }
+        
+        .shine-effect {
+          transform: translateX(-100%);
+          animation: shine 3s infinite;
         }
         
         .animate-writing span {
@@ -220,5 +245,33 @@ const Hero = () => {
     </section>
   );
 };
+
+// Styled component for the new button style
+const StyledWrapper = styled.div`
+  button {
+    border: none;
+    outline: none;
+    background-color: #000000;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 25px;
+    transition: all ease 0.1s;
+    box-shadow: 0px 5px 0px 0px #3b3c36;
+  }
+  button:active {
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px 0px #3b3c36;
+  }
+  
+  /* Responsive adjustments for the button */
+  @media (min-width: 640px) {
+    button {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+`;
 
 export default Hero;

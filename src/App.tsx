@@ -5,9 +5,10 @@ import Ourwork from './components/Ourwork';
 import Services from './components/Services';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-
+import SmoothScroll from './components/SmoothScroll';
 const App: React.FC = () => {
   return (
+    <SmoothScroll duration={1000} easing="easeInOut" offset={50}>
     <div className="min-h-screen bg-white">
       <main>
         <Hero />
@@ -18,6 +19,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
     </div>
+    </SmoothScroll>
   );
 }
 
