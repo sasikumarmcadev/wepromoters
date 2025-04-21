@@ -39,12 +39,51 @@ const Contact = () => {
       observer.observe(currentRef);
     }
 
+    // Custom validation styles
+    const setupCustomValidation = () => {
+      if (formRef.current) {
+        const inputs = formRef.current.querySelectorAll('input, textarea');
+        
+        inputs.forEach((input) => {
+          input.addEventListener('invalid', (e) => {
+            const elem = e.target as HTMLInputElement | HTMLTextAreaElement;
+            
+            // Prevent the default popup
+            e.preventDefault();
+            
+            // Add our custom validation message if the field is empty
+            if (!elem.value) {
+              if (!errors[elem.name as keyof typeof errors]) {
+                setErrors(prev => ({
+                  ...prev,
+                  [elem.name]: elem.name === 'message' ? 'Please share your thoughts with us' : `Please enter your ${elem.name}`
+                }));
+              }
+            }
+          });
+          
+          // Clear custom message when user starts typing
+          input.addEventListener('input', () => {
+            const inputElement = input as HTMLInputElement | HTMLTextAreaElement;
+            if (errors[inputElement.name as keyof typeof errors]) {
+              setErrors(prev => ({
+                ...prev,
+                [inputElement.name]: ''
+              }));
+            }
+          });
+        });
+      }
+    };
+    
+    setupCustomValidation();
+
     return () => {
       if (currentRef) {
         observer.unobserve(currentRef);
       }
     };
-  }, []);
+  }, [errors]);
 
   const validateName = (name: string) => {
     if (!name.trim()) {
@@ -208,6 +247,38 @@ const Contact = () => {
           border-radius: 50%;
           animation: spin 1s linear infinite;
         }
+        
+        /* Custom validation styles */
+        input:invalid, textarea:invalid {
+          box-shadow: none;
+        }
+        
+        /* Hide default browser validation popup */
+        ::-webkit-validation-bubble-message {
+          display: none;
+        }
+        
+        input:focus, textarea:focus {
+          outline: none;
+          border-color: #6B7280;
+        }
+        
+        .custom-error {
+          color: #ef4444;
+          font-size: 0.875rem;
+          margin-top: 0.25rem;
+          animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(-5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        input.has-error, textarea.has-error {
+          border-color: #ef4444;
+          background-color: #fef2f2;
+        }
       `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -259,7 +330,7 @@ const Contact = () => {
           </div>
 
           {/* Contact Form */}
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-xl shadow-md border border-gray-200 animate-bottom-up">
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-xl shadow-md border border-gray-200 animate-bottom-up" noValidate>
             <h3 className="text-xl font-semibold mb-6 border-b border-gray-200 pb-2 text-gray-900">Send Us a Message</h3>
             
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -271,12 +342,12 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50"
+                  className={`w-full px-4 py-3 border ${errors.name ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
                   onChange={handleInputChange}
                   onBlur={handleInputChange}
                   required
                 />
-                {errors.name && <div className="text-red-500 text-sm mt-1">{errors.name}</div>}
+                {errors.name && <div className="text-red-500 text-sm mt-1 custom-error">{errors.name}</div>}
               </div>
               <div>
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
@@ -286,12 +357,12 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50"
+                  className={`w-full px-4 py-3 border ${errors.email ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
                   onChange={handleInputChange}
                   onBlur={handleInputChange}
                   required
                 />
-                {errors.email && <div className="text-red-500 text-sm mt-1">{errors.email}</div>}
+                {errors.email && <div className="text-red-500 text-sm mt-1 custom-error">{errors.email}</div>}
               </div>
             </div>
 
@@ -303,11 +374,11 @@ const Contact = () => {
                 type="tel"
                 id="phone"
                 name="phone"
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50"
+                className={`w-full px-4 py-3 border ${errors.phone ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
                 onChange={handleInputChange}
                 onBlur={handleInputChange}
               />
-              {errors.phone && <div className="text-red-500 text-sm mt-1">{errors.phone}</div>}
+              {errors.phone && <div className="text-red-500 text-sm mt-1 custom-error">{errors.phone}</div>}
             </div>
 
             <div>
@@ -318,12 +389,12 @@ const Contact = () => {
                 id="message"
                 name="message"
                 rows={4}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50"
+                className={`w-full px-4 py-3 border ${errors.message ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
                 onChange={handleInputChange}
                 onBlur={handleInputChange}
                 required
               ></textarea>
-              {errors.message && <div className="text-red-500 text-sm mt-1">{errors.message}</div>}
+              {errors.message && <div className="text-red-500 text-sm mt-1 custom-error">{errors.message}</div>}
             </div>
 
             <button

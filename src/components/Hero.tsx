@@ -103,19 +103,19 @@ const Hero = () => {
             }`}
             style={{ top: '0', height: '100%' }}
           >
-            <div className="px-6 py-20 space-y-4 flex flex-col h-full">
+            <div className="px-6 py-20 space-y-4 flex flex-col h-full mt-6">
               <a href="#about" className="text-white block py-3 text-base font-medium border-b border-gray-800 hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>About</a>
               <a href="#work" className="text-white block py-3 text-base font-medium border-b border-gray-800 hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>Our work</a>
               <a href="#services" className="text-white block py-3 text-base font-medium border-b border-gray-800 hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>Services</a>
               <a href="#contact" className="text-white block py-3 text-base font-medium hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>Contact</a>
               
               {/* Mobile menu additional content */}
-              <div className="mt-auto pt-8 border-t border-gray-800">
+              {/* <div className="mt-auto pt-8 border-t border-gray-800">
                 <p className="text-gray-400 text-xs mb-4">Need immediate assistance?</p>
                 <button className="bg-white text-black font-medium rounded-full py-3 px-6 w-full hover:bg-gray-200 transition-colors text-sm">
                   Contact Us Now
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
