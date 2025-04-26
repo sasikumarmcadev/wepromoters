@@ -1,6 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import styled from 'styled-components';
+
+// Styled component for the button style from Hero section - modified for full width
+const StyledWrapper = styled.div`
+  width: 100%; // Make wrapper full width
+  
+  button {
+    width: 100%; // Make button take full width of wrapper
+    border: none;
+    outline: none;
+    background-color: #000000;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #fff;
+    border-radius: 25px;
+    transition: all ease 0.1s;
+    box-shadow: 0px 5px 0px 0px #3b3c36;
+  }
+  button:active {
+    transform: translateY(5px);
+    box-shadow: 0px 0px 0px 0px #3b3c36;
+  }
+  
+  /* Responsive adjustments for the button */
+  @media (min-width: 640px) {
+    button {
+      padding: 12px 24px;
+      font-size: 14px;
+    }
+  }
+`;
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -397,25 +429,30 @@ const Contact = () => {
               {errors.message && <div className="text-red-500 text-sm mt-1 custom-error">{errors.message}</div>}
             </div>
 
-            <button
-              type="submit"
-              className="w-full bg-gradient-to-r from-gray-800 to-black text-white px-6 py-3 rounded-lg hover:from-black hover:to-gray-800 transition-colors font-medium flex items-center justify-center space-x-2 shadow-sm relative"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <>
-                  <span style={{ visibility: 'hidden' }}>Send Message</span>
-                  <div className="loading-overlay">
-                    <div className="spinner"></div>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <Mail className="w-5 h-5" />
-                  <span>Send Message</span>
-                </>
-              )}
-            </button>
+            {/* Full width button wrapper */}
+            <StyledWrapper>
+              <button
+                type="submit"
+                disabled={isLoading}
+                className="flex items-center justify-center space-x-2"
+              >
+                {isLoading ? (
+                  <>
+                    <span style={{ visibility: 'hidden' }}>Send Message</span>
+                    <div className="loading-overlay">
+                      <div className="spinner"></div>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <span>Send Message</span>
+                    <span className="relative transition-all duration-300 group-hover:translate-x-1">
+                      <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
+                    </span>
+                  </>
+                )}
+              </button>
+            </StyledWrapper>
           </form>
         </div>
       </div>
