@@ -1,21 +1,21 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 
-const OurWork = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
-  const [slideDirection, setSlideDirection] = useState(''); // 'left' or 'right'
+const OurWork: React.FC = () => {
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
+  const [slideDirection, setSlideDirection] = useState<string>(''); // 'left' or 'right'
   const sectionRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   const carouselRef = useRef<HTMLDivElement | null>(null);
-  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+  const [hasUserInteracted, setHasUserInteracted] = useState<boolean>(false);
   const incomingVideoRef = useRef<HTMLVideoElement | null>(null);
   const animationTimeoutRef = useRef<number | null>(null);
   const resetAnimationTimeoutRef = useRef<number | null>(null);
   const playbackTimeoutRef = useRef<number | null>(null);
   const [incomingIndex, setIncomingIndex] = useState<number | null>(null);
 
-  const videos = [
+  const videos: { src: string; title: string; description: string }[] = [
     {
       src: "https://res.cloudinary.com/dhw6yweku/video/upload/v1744983639/Hay1_sro3eb.mp4",
       title: "Ad shoot",
@@ -97,7 +97,7 @@ const OurWork = () => {
         videoElement.preload = 'auto';
 
         if (videoElement.readyState >= 2) {
-          videoElement.play().catch((error) => {
+          videoElement.play().catch((error: Error) => {
             console.error("Video play failed:", error);
             videoElement.load();
             videoElement.play().catch(() => {
@@ -106,7 +106,7 @@ const OurWork = () => {
           });
         } else {
           const handleCanPlay = () => {
-            videoElement.play().catch((error) => {
+            videoElement.play().catch((error: Error) => {
               console.error("Video play failed on canplay:", error);
             });
             videoElement.removeEventListener('canplay', handleCanPlay);
@@ -151,7 +151,7 @@ const OurWork = () => {
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
+      ([entry]: IntersectionObserverEntry[]) => {
         if (entry.isIntersecting) {
           setIsVisible(true);
           observer.unobserve(entry.target);
@@ -218,7 +218,7 @@ const OurWork = () => {
     }
   }, [isAnimating, currentIndex, hasUserInteracted, isVisible, safePlayVideo]);
 
-  const getOrderedVideos = () => {
+  const getOrderedVideos = (): number[] => {
     const numVideos = videos.length;
     const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
     
@@ -300,7 +300,12 @@ const OurWork = () => {
       resetAnimationTimeoutRef.current = setTimeout(() => {
         setIsAnimating(false);
         setSlideDirection('');
-      }, 300);
+        // Play the new current video after animation
+        const newCurrentVideo = videoRefs.current[newIndex];
+        if (newCurrentVideo && hasUserInteracted && isVisible) {
+          safePlayVideo(newCurrentVideo);
+        }
+      }, 900); // Match the animation duration
     }, 50);
   };
 
@@ -350,15 +355,15 @@ const OurWork = () => {
     }
   };
 
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
-  const touchStartY = useRef(0);
-  const touchCurrentX = useRef(0);
-  const isSwipingRef = useRef(false);
-  const swipeDeltaRef = useRef(0);
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+  const touchStartY = useRef<number>(0);
+  const touchCurrentX = useRef<number>(0);
+  const isSwipingRef = useRef<boolean>(false);
+  const swipeDeltaRef = useRef<number>(0);
   const carouselContainerRef = useRef<HTMLDivElement | null>(null);
 
-  const handleTouchStart = (e: React.TouchEvent) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     if (isAnimating) return;
     
     touchStartX.current = e.touches[0].clientX;
@@ -374,7 +379,7 @@ const OurWork = () => {
     }
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     if (!isSwipingRef.current || isAnimating) return;
     
     touchEndX.current = e.touches[0].clientX;
@@ -406,7 +411,7 @@ const OurWork = () => {
     const threshold = 50;
     
     if (carouselContainerRef.current) {
-      carouselContainerRef.current.style.transition = 'transform 300ms ease-out';
+      carouselContainerRef.current.style.transition = 'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)';
       carouselContainerRef.current.style.transform = 'translateX(0)';
     }
     
@@ -514,8 +519,8 @@ const OurWork = () => {
                 <div 
                   className="absolute inset-0 flex justify-center items-center gap-2 xs:gap-4 sm:gap-6"
                   style={{
-                    transform: slideDirection === 'left' ? 'translateX(-100%)' : 'translateX(100%)',
-                    animation: `slideIn${slideDirection === 'left' ? 'Right' : 'Left'} 300ms forwards`,
+                    transform: slideDirection === 'left' ? 'translateX(100%)' : 'translateX(-100%)',
+                    animation: `slideIn${slideDirection === 'left' ? 'Left' : 'Right'} 900ms cubic-bezier(0.22, 1, 0.36, 1) forwards`,
                     zIndex: 20
                   }}
                 >
@@ -527,7 +532,7 @@ const OurWork = () => {
                         : (currentIndex - 1 + videos.length) % videos.length;
                       
                       const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
-                      let orderedIndicesForNextSlide;
+                      let orderedIndicesForNextSlide: number[];
                       
                       if (isMobile) {
                         orderedIndicesForNextSlide = [
@@ -597,13 +602,15 @@ const OurWork = () => {
               
               <style>{`
                 @keyframes slideInRight {
-                  from { transform: translateX(100%); }
-                  to { transform: translateX(0); }
+                  from { transform: translateX(-100%); opacity: 0; }
+                  to { transform: translateX(0); opacity: 1; }
                 }
                 
                 @keyframes slideInLeft {
-                  from { transform: translateX(-100%); }
-                  to { transform: translateX(0); }
+                  0% { transform: translateX(100%) scale(0.95); opacity: 0; }
+                  30% { transform: translateX(60%) scale(0.97); opacity: 0.4; }
+                  60% { transform: translateX(20%) scale(0.99); opacity: 0.7; }
+                  100% { transform: translateX(0) scale(1); opacity: 1; }
                 }
                 
                 video::-webkit-media-controls {
@@ -630,7 +637,7 @@ const OurWork = () => {
                   right: 0;
                   height: 4px;
                   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-                  z-index: 1;
+                  zIndex: 1;
                   pointer-events: none;
                 }
                 
@@ -639,6 +646,7 @@ const OurWork = () => {
                   will-change: transform;
                   user-select: none;
                   -webkit-user-select: none;
+                  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 
                 @media (max-width: 639px) {
@@ -661,16 +669,16 @@ const OurWork = () => {
                 }
                 
                 .swipe-container {
-                  transition: transform 300ms cubic-bezier(0.25, 0.1, 0.25, 1);
+                  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 
                 .swipe-item {
-                  transition: transform telephone 300ms ease, opacity 300ms ease;
+                  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1), opacity 300ms cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 
                 .swipe-active {
                   transform: scale(1.02);
-                  transition: transform 300ms ease;
+                  transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
                 }
                 
                 .text-shadow {
@@ -682,7 +690,7 @@ const OurWork = () => {
           
           <div className="flex justify-center items-center mt-6">
             <button 
-              onClick={e => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 e.stopPropagation();
                 prevVideo();
@@ -697,7 +705,7 @@ const OurWork = () => {
             </button>
             
             <button 
-              onClick={e => {
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                 e.preventDefault();
                 e.stopPropagation();
                 nextVideo();
