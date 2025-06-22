@@ -101,7 +101,7 @@ const Footer = () => {
         {/* Copyright */}
         <div className="text-center text-gray-400 mt-2">
           <div className="footer-animate opacity-0" style={{ animationDelay: '0.8s' }}>
-            <p>© {currentYear} All rights reserved. Developed by <a href="https://www.nextriadsolutions.com/" target='_blank'>NextriadSolutions</a>. </p>
+            <p>© {currentYear} All rights reserved. Developed by <a href="https://sasikumarmca.vercel.app/" target='_blank'>SasiKumar</a>. </p>
           </div>
         </div>
       </div>
