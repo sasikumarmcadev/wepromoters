@@ -345,20 +345,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
-            <div>
-              <h3 className="text-xl font-semibold mb-6 border-b border-gray-200 pb-2 text-gray-900">Business Hours</h3>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <p className="font-medium text-gray-900">Monday - Friday</p>
-                  <p className="text-gray-600">9:00 AM - 10:00 PM</p>
-                </div>
-                <div className="flex justify-between items-center">
-                  <p className="font-medium text-gray-900">Saturday & Sunday</p>
-                  <p className="text-gray-600">10:00 AM - 6:00 PM</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Contact Form */}
