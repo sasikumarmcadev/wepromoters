@@ -57,7 +57,13 @@ const Hero = () => {
           <div className={`${scrolled ? 'bg-black' : 'bg-transparent'} transition-all duration-300 text-white fixed top-5 left-0 right-0 w-11/12 max-w-7xl mx-auto rounded-full z-50`}>
             <div className="flex justify-between items-center px-6 sm:px-8 py-4 mx-auto">
               <div className="flex items-center">
-                <h1 className="text-white text-xl sm:text-2xl font-bold">  <a href="#">We Promoters</a></h1>
+                <a href="#" className="flex items-center">
+                  <img 
+                    src="https://res.cloudinary.com/dhw6yweku/image/upload/v1751985095/We_Promoterswstr_epmdgn.png" 
+                    alt="We Promoters Logo" 
+                    className="h-8 w-auto sm:h-8 md:h-10 object-contain transition-all duration-300"
+                  />
+                </a>
               </div>
               
               {/* Desktop Navigation - Enhanced with hover effects */}

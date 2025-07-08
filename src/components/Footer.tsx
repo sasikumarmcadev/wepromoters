@@ -43,8 +43,7 @@ const Footer = () => {
           {/* Company Info */}
           <div className="footer-animate opacity-0">
             <div className="flex items-center mb-6">
-              <div className="h-2 w-2 rounded-full bg-white mr-2"></div>
-              <h3 className="text-xl font-bold"><a href="#">We Promoters</a></h3>
+              <a href="#"> <img src="https://res.cloudinary.com/dhw6yweku/image/upload/v1751985095/We_Promoterswstr_epmdgn.png" alt="" className='h-14'/></a>
             </div>
             <p className="text-gray-300">
               Your trusted partner in digital growth, delivering expert marketing solutions to help your brand thrive in the digital landscape.
