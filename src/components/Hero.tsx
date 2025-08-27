@@ -59,7 +59,7 @@ const Hero = () => {
               <div className="flex items-center">
                 <a href="#" className="flex items-center">
                   <img 
-                    src="https://res.cloudinary.com/dhw6yweku/image/upload/v1751985095/We_Promoterswstr_epmdgn.png" 
+                    src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png" 
                     alt="We Promoters Logo" 
                     className="h-8 w-auto sm:h-8 md:h-10 object-contain transition-all duration-300"
                   />
