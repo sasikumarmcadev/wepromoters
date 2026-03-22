@@ -109,7 +109,7 @@ const About: React.FC = () => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`group relative p-8 bg-white/[0.01] hover:bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] rounded-[2rem] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+                className={`group relative p-8 bg-white/[0.01] hover:bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] rounded-xl transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
                 style={{ transitionDelay: `${400 + index * 150}ms` }}
               >
                 <div className="flex items-start justify-between mb-4">

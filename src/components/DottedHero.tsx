@@ -20,7 +20,7 @@ export default function DottedHero() {
 					)}
 				/>
 				
-				<div className="relative z-10 flex flex-col items-center justify-center">
+				<div className="relative z-10 flex flex-col items-center justify-center px-4 w-full">
 					{/* Logo with sophisticated float */}
 					<motion.div
 						initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -33,16 +33,16 @@ export default function DottedHero() {
 						<img
 							src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png"
 							alt="Logo"
-							className="h-14 sm:h-24 md:h-32 w-auto brightness-110 active:scale-95 transition-transform"
+							className="h-12 sm:h-24 md:h-32 w-auto brightness-110 active:scale-95 transition-transform"
 						/>
 					</motion.div>
 
-					<div className="mt-8 flex flex-col items-center justify-center space-y-3">
+					<div className="mt-6 sm:mt-8 flex flex-col items-center justify-center space-y-3 w-full">
 						<motion.p 
 							initial={{ opacity: 0, y: 10 }}
 							animate={{ opacity: 1, y: 0 }}
 							transition={{ delay: 0.5, duration: 1, ease: [0.23, 1, 0.32, 1] }}
-							className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[-0.04em] text-white uppercase"
+							className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[-0.04em] text-white uppercase text-center leading-tight"
 						>
 							Digital Marketing Agency
 						</motion.p>
@@ -51,22 +51,19 @@ export default function DottedHero() {
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
 							transition={{ delay: 1, duration: 1.5 }}
-							className="flex items-center gap-4"
+							className="flex items-center gap-3 sm:gap-4"
 						>
-							<div className="h-px w-8 sm:w-12 bg-white/20" />
-							<p className="text-[10px] sm:text-sm md:text-base font-bold tracking-[0.4em] text-white/40 ">
+							<div className="h-px w-6 sm:w-12 bg-white/20" />
+							<p className="text-[9px] sm:text-sm md:text-base font-bold tracking-[0.2em] sm:tracking-[0.4em] text-white/40 text-center">
 								We convert business into brand
 							</p>
-							<div className="h-px w-8 sm:w-12 bg-white/20" />
+							<div className="h-px w-6 sm:w-12 bg-white/20" />
 						</motion.div>
 					</div>
 				</div>
 			</div>
 
-			{/* Bottom Decorative Element */}
-			<div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-20">
-				<div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
-			</div>
+
 		</section>
 	);
 }

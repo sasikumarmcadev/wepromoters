@@ -83,8 +83,6 @@ const OurClients = () => {
         </div>
       </div>
 
-      {/* Modern Background Gradient */}
-      <div className="absolute -bottom-[10%] -left-[10%] w-[500px] h-[500px] bg-white/[0.01] rounded-full blur-[100px] pointer-events-none" />
     </section>
   );
 };

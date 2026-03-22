@@ -87,6 +87,26 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
   const rotateYContent = useTransform(springX, [-0.5, 0.5], [-12, 12]);
 
   const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => window.innerWidth < 768;
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (checkMobile()) {
+          setIsHovered(entry.isIntersecting);
+        }
+      },
+      {
+        threshold: 0.6, // Trigger when 60% is visible
+        rootMargin: '-30% 0px -30% 0px' // Central view zone
+      }
+    );
+
+    if (containerRef.current) observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -98,10 +118,12 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
 
   return (
     <motion.div
+      ref={containerRef}
       className={cn(
         "group relative p-10 h-[320px] bg-white/[0.01] overflow-hidden transition-all duration-700",
         "border-b border-white/[0.05] md:border-r",
-        (index + 1) % 4 === 0 && "md:border-r-0"
+        (index + 1) % 4 === 0 && "md:border-r-0",
+        isHovered && "bg-white/[0.03] -translate-y-2" // Simulate hover on mobile
       )}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -123,14 +145,23 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
       viewport={{ once: true }}
     >
       {/* Premium Glass Effect on Hover */}
-      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+      <div className={cn(
+        "absolute inset-0 bg-gradient-to-br from-white/[0.03] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700",
+        isHovered && "opacity-100"
+      )} />
 
       {/* Hover Shine Effect */}
-      <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/[0.05] to-transparent skew-x-[-20deg]" />
+      <div className={cn(
+        "absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/[0.05] to-transparent skew-x-[-20deg]",
+        isHovered && "translate-x-[100%]"
+      )} />
 
       {/* Icon Area - Top Right with 3D Pop Out */}
       <motion.div
-        className="absolute top-8 right-8 text-white/20 group-hover:text-white/60 transition-colors z-20"
+        className={cn(
+          "absolute top-8 right-8 text-white/20 group-hover:text-white/60 transition-colors z-20",
+          isHovered && "text-white/60"
+        )}
         style={{
           rotateX: rotateXIcon,
           rotateY: rotateYIcon,
@@ -143,7 +174,10 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
       </motion.div>
 
       {/* Background Dots Pattern */}
-      <div className="absolute inset-0 opacity-[0.02] group-hover:opacity-[0.04] transition-opacity pointer-events-none"
+      <div className={cn(
+        "absolute inset-0 opacity-[0.02] group-hover:opacity-[0.04] transition-opacity pointer-events-none",
+        isHovered && "opacity-[0.04]"
+      )}
         style={{
           backgroundImage: 'radial-gradient(circle, #ffffff 1px, transparent 1px)',
           backgroundSize: '24px 24px'
@@ -172,10 +206,16 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
 
         <div className="relative border-t border-white/[0.05] pt-6">
           {/* Decorative Accent Element */}
-          <div className="absolute -top-px left-0 w-8 h-px bg-white/20 group-hover:w-16 group-hover:bg-white/40 transition-all duration-700" />
+          <div className={cn(
+            "absolute -top-px left-0 w-8 h-px bg-white/20 group-hover:w-16 group-hover:bg-white/40 transition-all duration-700",
+            isHovered && "w-16 bg-white/40"
+          )} />
 
           <motion.p
-            className="text-[13px] text-white/30 group-hover:text-white/50 leading-relaxed font-light transition-colors max-w-[260px]"
+            className={cn(
+              "text-[13px] text-white/30 group-hover:text-white/50 leading-relaxed font-light transition-colors max-w-[260px]",
+              isHovered && "text-white/50"
+            )}
             style={{
               z: isHovered ? 30 : 0
             }}
@@ -186,7 +226,10 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
       </motion.div>
 
       {/* Modern Floating Highlight Line */}
-      <div className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700" />
+      <div className={cn(
+        "absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-white/30 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-700",
+        isHovered && "scale-x-100"
+      )} />
     </motion.div>
   );
 };
