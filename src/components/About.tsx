@@ -1,12 +1,10 @@
-import React, { useRef, useState, useEffect } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
-// About Component
 const About: React.FC = () => {
   const [counters, setCounters] = useState([0, 0, 0, 0]);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Intersection Observer for animation triggers
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -18,121 +16,123 @@ const About: React.FC = () => {
       { threshold: 0.1 }
     );
 
-    // Store the current value in a variable to use in cleanup
     const currentRef = sectionRef.current;
-
-    if (currentRef) {
-      observer.observe(currentRef);
-    }
-
+    if (currentRef) observer.observe(currentRef);
     return () => {
-      if (currentRef) {
-        observer.unobserve(currentRef);
-      }
+      if (currentRef) observer.unobserve(currentRef);
     };
   }, []);
 
-  // Counter animation
   useEffect(() => {
     if (!isVisible) return;
 
-    const targets = [1, 26, 30, 100];
-    const duration = 2000; // 2 seconds
+    const targets = [2, 26, 30, 100];
+    const duration = 2000;
     const steps = 60;
     const interval = duration / steps;
 
-    const incrementCounters = () => {
-      setCounters(prevCounters => 
-        prevCounters.map((counter, idx) => {
-          const target = targets[idx];
+    const counterInterval = setInterval(() => {
+      setCounters(prev =>
+        prev.map((c, i) => {
+          const target = targets[i];
           const increment = target / steps;
-          const newValue = counter + increment;
-          return newValue >= target ? target : newValue;
+          const next = c + increment;
+          return next >= target ? target : next;
         })
       );
-    };
-
-    const counterInterval = setInterval(() => {
-      incrementCounters();
-      
-      // Check if all counters have reached their targets
-      if (counters.every((counter, idx) => counter >= targets[idx] * 0.99)) {
-        setCounters(targets);
-        clearInterval(counterInterval);
-      }
     }, interval);
 
     return () => clearInterval(counterInterval);
-  }, [isVisible, counters]);
+  }, [isVisible]);
 
   const stats = [
     {
-      target: '1',
-      current: Math.round(counters[0]),
-      label: 'Years experience',
-      description: 'Experienced in social media marketing and help businesses grow their online presence with strategy',
+      value: Math.round(counters[0]),
+      suffix: '+',
+      label: 'Years of Expertise',
+      description: 'Strategic social media and digital growth expertise matured over years of evolution.',
     },
     {
-      target: '26',
-      current: Math.round(counters[1]),
-      label: 'Projects completed',
-      description: 'Over 250 successful projects delivered with quality and care',
+      value: Math.round(counters[1]),
+      suffix: '+',
+      label: 'Projects Delivered',
+      description: 'High-impact campaigns and creative solutions delivered with precision and passion.',
     },
-    // {
-    //   target: '30',
-    //   current: Math.round(counters[2]),
-    //   label: 'Skilled Tradespeople',
-    //   description: 'Our team of 30 experts ensures top-quality results',
-    // },
     {
-      target: '100%',
-      current: Math.round(counters[3]) + '%',
-      label: 'Client satisfaction',
-      description: 'All of our clients are satisfied with our work and service',
+      value: Math.round(counters[3]),
+      suffix: '%',
+      label: 'Client Happiness',
+      description: 'Our commitment to excellence reflected in every partnership and result.',
     },
   ];
 
   return (
-    <section id="about" className="bg-gray-100 w-full" ref={sectionRef}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 lg:py-16">
-        {/* Header Section */}
-        <div className="mb-6 md:mb-8 overflow-hidden">
-          <div className={`transition-all duration-1000 ease-out ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
-            <button className="bg-gray-900 text-white text-xs sm:text-sm font-medium px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
-              About us
-            </button>
-          </div>
-          
-          <div className={`transition-all duration-1000 ease-out delay-200 ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mt-3 md:mt-4 mb-3 sm:mb-4 md:mb-6">
-              Digital Marketing Specialists
-            </h2>
-          </div>
-          
-          <div className={`transition-all duration-1000 ease-out delay-400 ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
-            <p className="text-sm sm:text-base md:text-lg text-gray-700 max-w-5xl">
-              Welcome to We Promoters, your trusted digital marketing experts, dedicated to transforming brands with strategy and creativity. With the real experience in SEO, social media marketing, content creation, and paid advertising, we take pride in delivering data-driven results and a seamless client experience. Our mission is to bring your brand's vision to life through clear communication, innovative strategies, and expert guidance every step of the way. Let's grow your online presence and drive real results!
-            </p>
-          </div>
-        </div>
+    <section
+      id="about"
+      className="relative w-full overflow-hidden py-24 md:py-32 bg-background border-t border-white/[0.05]"
+      ref={sectionRef}
+    >
+      {/* Subtle Background Elements */}
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[120px] -translate-y-1/2 pointer-events-none" />
 
-        {/* Stats Section */}
-        <div className="py-6 sm:py-8 md:py-12">
-          <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-24 items-start">
+
+          {/* Left Content Column */}
+          <div className="flex-1 space-y-10">
+            <div className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/60">
+                <span className="size-1.5 rounded-full bg-white animate-pulse" />
+                The Story
+              </span>
+            </div>
+
+            <div className={`transition-all duration-1000 delay-100 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-[0.9] uppercase">
+                Digital Marketing <br />
+                <span className="text-white/20">Specialists.</span>
+              </h2>
+            </div>
+
+            <div className={`transition-all duration-1000 delay-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <p className="text-lg sm:text-xl text-white/50 leading-relaxed font-light max-w-2xl">
+                Welcome to Adora, your dedicated partner in digital transformation. We blend deep strategic insight with fearless creativity to help brands thrive in a complex digital landscape.
+              </p>
+              <p className="mt-6 text-base text-white/30 leading-relaxed font-light max-w-2xl">
+                From SEO and high-conversion ad campaigns to viral content strategies, we deliver data-driven results that move the needle. Our mission is to amplify your vision through transparent communication and innovative execution.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Stats Column */}
+          <div className="flex-1 w-full space-y-6">
             {stats.map((stat, index) => (
-              <div 
-                key={index} 
-                className={`text-center p-4 sm:p-6 bg-gray rounded-lg shadow-sm hover:shadow-md transition-all duration-300 ease-out overflow-hidden ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}
-                style={{ transitionDelay: `${600 + index * 150}ms` }}
+              <div
+                key={index}
+                className={`group relative p-8 bg-white/[0.01] hover:bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.1] rounded-[2rem] transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+                style={{ transitionDelay: `${400 + index * 150}ms` }}
               >
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-1 sm:mb-2">{stat.current}</div>
-                <div className="text-base sm:text-lg md:text-xl font-semibold text-gray-900 mb-1 sm:mb-2">{stat.label}</div>
-                <p className="text-xs sm:text-sm md:text-base text-gray-600">{stat.description}</p>
+                <div className="flex items-start justify-between mb-4">
+                  <div className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter text-white tabular-nums">
+                    {stat.value}{stat.suffix}
+                  </div>
+                  <div className="mt-2 p-2 rounded-full border border-white/10 group-hover:bg-white group-hover:text-black transition-all duration-500">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7 17l9.2-9.2M17 17V7H7" /></svg>
+                  </div>
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2 uppercase tracking-wide">{stat.label}</h3>
+                <p className="text-sm sm:text-base text-white/30 font-light leading-relaxed max-w-xs">{stat.description}</p>
+
+                {/* Decorative Line on Hover */}
+                <div className="absolute bottom-6 right-8 left-8 h-px bg-white/10 scale-x-0 group-hover:scale-x-100 transition-transform duration-700 origin-left" />
               </div>
             ))}
           </div>
         </div>
       </div>
+
+      {/* Modern Background Gradient */}
+      <div className="absolute -bottom-[20%] -right-[10%] w-[600px] h-[600px] bg-white/[0.01] rounded-full blur-[150px] pointer-events-none" />
     </section>
   );
 };

@@ -1,38 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import styled from 'styled-components';
-
-// Styled component for the button style from Hero section - modified for full width
-const StyledWrapper = styled.div`
-  width: 100%; // Make wrapper full width
-  
-  button {
-    width: 100%; // Make button take full width of wrapper
-    border: none;
-    outline: none;
-    background-color: #000000;
-    padding: 10px 20px;
-    font-size: 12px;
-    font-weight: 700;
-    color: #fff;
-    border-radius: 25px;
-    transition: all ease 0.1s;
-    box-shadow: 0px 5px 0px 0px #3b3c36;
-  }
-  button:active {
-    transform: translateY(5px);
-    box-shadow: 0px 0px 0px 0px #3b3c36;
-  }
-  
-  /* Responsive adjustments for the button */
-  @media (min-width: 640px) {
-    button {
-      padding: 12px 24px;
-      font-size: 14px;
-    }
-  }
-`;
+import { services } from './OurServices';
 
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -41,9 +9,8 @@ const Contact = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({
     name: '',
-    email: '',
     phone: '',
-    message: ''
+    service: ''
   });
 
   useEffect(() => {
@@ -75,14 +42,14 @@ const Contact = () => {
     const setupCustomValidation = () => {
       if (formRef.current) {
         const inputs = formRef.current.querySelectorAll('input, textarea');
-        
+
         inputs.forEach((input) => {
           input.addEventListener('invalid', (e) => {
             const elem = e.target as HTMLInputElement | HTMLTextAreaElement;
-            
+
             // Prevent the default popup
             e.preventDefault();
-            
+
             // Add our custom validation message if the field is empty
             if (!elem.value) {
               if (!errors[elem.name as keyof typeof errors]) {
@@ -93,7 +60,7 @@ const Contact = () => {
               }
             }
           });
-          
+
           // Clear custom message when user starts typing
           input.addEventListener('input', () => {
             const inputElement = input as HTMLInputElement | HTMLTextAreaElement;
@@ -107,7 +74,7 @@ const Contact = () => {
         });
       }
     };
-    
+
     setupCustomValidation();
 
     return () => {
@@ -125,40 +92,31 @@ const Contact = () => {
     return nameRegex.test(name) ? '' : 'Name should only contain A-Z, a-z, and . (max 20 characters)';
   };
 
-  const validateEmail = (email: string) => {
-    if (!email.trim()) {
-      return 'Email is required';
+  const validatePhone = (phone: string) => {
+    if (!phone.trim()) {
+      return 'Phone number is required';
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email) ? '' : 'Please enter a valid email address';
+    const phoneRegex = /^[0-9+() -]{10,20}$/;
+    return phoneRegex.test(phone) ? '' : 'Please enter a valid phone number';
   };
 
-  const validatePhone = (phone: string) => {
-    if (phone.trim() && !/^\+?\d{10,15}$/.test(phone.replace(/\s/g, ''))) {
-      return 'Please enter a valid phone number';
+  const validateService = (service: string) => {
+    if (!service.trim()) {
+      return 'Please selection a service';
     }
     return '';
   };
 
-  const validateMessage = (message: string) => {
-    if (!message.trim()) {
-      return 'Message is required';
-    }
-    return !message.includes('<') && !message.includes('>') ? '' : 'Message cannot contain < or > characters';
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     let error = '';
 
     if (name === 'name') {
       error = validateName(value);
-    } else if (name === 'email') {
-      error = validateEmail(value);
     } else if (name === 'phone') {
       error = validatePhone(value);
-    } else if (name === 'message') {
-      error = validateMessage(value);
+    } else if (name === 'service') {
+      error = validateService(value);
     }
 
     setErrors(prevErrors => ({ ...prevErrors, [name]: error }));
@@ -170,23 +128,20 @@ const Contact = () => {
     if (!formRef.current) return;
 
     const nameInput = formRef.current.elements.namedItem('name') as HTMLInputElement;
-    const emailInput = formRef.current.elements.namedItem('email') as HTMLInputElement;
     const phoneInput = formRef.current.elements.namedItem('phone') as HTMLInputElement;
-    const messageInput = formRef.current.elements.namedItem('message') as HTMLTextAreaElement;
+    const serviceInput = formRef.current.elements.namedItem('service') as HTMLSelectElement;
 
     const nameError = validateName(nameInput.value);
-    const emailError = validateEmail(emailInput.value);
     const phoneError = validatePhone(phoneInput.value);
-    const messageError = validateMessage(messageInput.value);
+    const serviceError = validateService(serviceInput.value);
 
     setErrors({
       name: nameError,
-      email: emailError,
       phone: phoneError,
-      message: messageError
+      service: serviceError
     });
 
-    if (nameError || emailError || phoneError || messageError) {
+    if (nameError || phoneError || serviceError) {
       return;
     }
 
@@ -205,7 +160,7 @@ const Contact = () => {
         () => {
           setMessageStatus('success');
           formRef.current?.reset();
-          setErrors({ name: '', email: '', phone: '', message: '' });
+          setErrors({ name: '', phone: '', service: '' });
 
           setTimeout(() => {
             setMessageStatus(null);
@@ -222,16 +177,25 @@ const Contact = () => {
   };
 
   return (
-    <section 
-      ref={sectionRef} 
-      id="contact" 
-      className="py-24 bg-gradient-to-b from-gray-50 to-white"
+    <section
+      ref={sectionRef}
+      id="contact"
+      className="relative py-24 md:py-32 bg-[#050505] overflow-hidden border-t border-white/[0.05]"
     >
+      {/* Robotic Grid Background */}
+      <div className="absolute inset-0 pointer-events-none opacity-[0.03]"
+        style={{
+          backgroundImage: `linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)`,
+          backgroundSize: '40px 40px'
+        }}
+      />
+
+
       <style>{`
         .animate-bottom-up {
           opacity: 0;
-          transform: translateY(40px);
-          transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+          transform: translateY(20px);
+          transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         @keyframes spin {
           0% { transform: rotate(0deg); }
@@ -239,221 +203,277 @@ const Contact = () => {
         }
         .message {
           position: fixed;
-          bottom: 20px;
-          right: 20px;
-          padding: 16px;
-          border-radius: 8px;
+          bottom: 24px;
+          right: 24px;
+          padding: 14px 24px;
+          border-radius: 0;
           color: white;
           display: flex;
           align-items: center;
-          gap: 8px;
+          gap: 12px;
           z-index: 1000;
+          font-family: 'Inter', monospace;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          background-color: rgba(0, 0, 0, 0.8);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        .message.success {
-          background-color: #22c55e;
+        .message.success { border-bottom: 2px solid #22c55e; }
+        .message.error { border-bottom: 2px solid #ef4444; }
+        
+        input, textarea, select {
+          background-color: rgba(255, 255, 255, 0.01) !important;
+          border: 1px solid rgba(255, 255, 255, 0.05) !important;
+          color: white !important;
+          border-radius: 4px !important;
+          padding: 18px 20px !important;
+          font-size: 15px !important;
+          font-weight: 300 !important;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+          appearance: none;
         }
-        .message.error {
-          background-color: #ef4444;
+        
+        input:focus, textarea:focus, select:focus {
+          border-color: rgba(255, 255, 255, 0.15) !important;
+          background-color: rgba(255, 255, 255, 0.02) !important;
+          box-shadow: 0 0 40px rgba(255,255,255,0.02) !important;
+          outline: none !important;
         }
-        .tick-icon {
-          width: 24px;
-          height: 24px;
-          fill: white;
+
+        select {
+          cursor: pointer;
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.3)' %3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+          background-repeat: no-repeat;
+          background-position: right 20px center;
+          background-size: 16px;
         }
-        .loading-overlay {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(255, 255, 255, 0.7);
+
+        select option {
+          background: #0a0a0a;
+          color: white;
+          padding: 20px;
+        }
+
+        input::placeholder, textarea::placeholder {
+          color: rgba(255, 255, 255, 0.1) !important;
+          text-transform: none;
+          font-size: 14px;
+          letter-spacing: 0.02em;
+        }
+
+        label {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          margin-bottom: 14px;
           display: flex;
-          justify-content: center;
           align-items: center;
-        }
-        .spinner {
-          width: 20px;
-          height: 20px;
-          border: 2px solid #fff;
-          border-top: 2px solid transparent;
-          border-radius: 50%;
-          animation: spin 1s linear infinite;
+          gap: 10px;
         }
         
-        /* Custom validation styles */
-        input:invalid, textarea:invalid {
-          box-shadow: none;
+        label::before {
+          content: '';
+          width: 4px;
+          height: 4px;
+          background: white;
+          opacity: 0.3;
         }
-        
-        /* Hide default browser validation popup */
-        ::-webkit-validation-bubble-message {
-          display: none;
+
+        .corner-panel {
+          position: relative;
+          background: rgba(255, 255, 255, 0.005);
+          border: 1px solid rgba(255, 255, 255, 0.03);
+          border-radius: 8px;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
-        input:focus, textarea:focus {
-          outline: none;
-          border-color: #6B7280;
+        .corner-panel:hover {
+          background: rgba(255, 255, 255, 0.08); /* Much brighter white tint */
+          border-color: rgba(255, 255, 255, 0.2);
+          box-shadow: 0 0 50px rgba(255, 255, 255, 0.05);
         }
-        
-        .custom-error {
-          color: #ef4444;
-          font-size: 0.875rem;
-          margin-top: 0.25rem;
-          animation: fadeIn 0.3s ease-in-out;
+
+        .corner-accent {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          border-color: rgba(255, 255, 255, 0.15);
+          pointer-events: none;
         }
-        
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-5px); }
-          to { opacity: 1; transform: translateY(0); }
+        .top-left { top: 12px; left: 12px; border-top: 1px solid; border-left: 1px solid; }
+        .top-right { top: 12px; right: 12px; border-top: 1px solid; border-right: 1px solid; }
+        .bottom-left { bottom: 12px; left: 12px; border-bottom: 1px solid; border-left: 1px solid; }
+        .bottom-right { bottom: 12px; right: 12px; border-bottom: 1px solid; border-right: 1px solid; }
+
+        .tech-button {
+          background: rgba(255, 255, 255, 0.03);
+          color: white;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: 0.3em;
+          height: 64px;
+          width: 100%;
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 4px;
         }
-        
-        input.has-error, textarea.has-error {
-          border-color: #ef4444;
-          background-color: #fef2f2;
+        .tech-button:hover { 
+          background: white; 
+          color: black;
+          box-shadow: 0 0 30px rgba(255,255,255,0.1);
         }
+        .tech-button:active { transform: scale(0.98); }
+        .tech-button::before {
+          content: '';
+          position: absolute;
+          inset: 0;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+          transform: translateX(-100%);
+          transition: transform 0.6s;
+        }
+        .tech-button:hover::before { transform: translateX(100%); }
+        .tech-button:disabled { opacity: 0.5; }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-bottom-up">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get in Touch</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">Have a project in mind? Let's discuss how we can help bring your vision to life.</p>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="mb-24 animate-bottom-up text-center flex flex-col items-center">
+          <h2 className="text-3xl sm:text-5xl md:text-7xl lg:text-5xl font-semibold text-white mb-6">
+            Get in <span className="text-white/20 not-italic ">Touch.</span>
+          </h2>
+          <p className="text-white/40 max-w-xl font-light text-base leading-relaxed tracking-widest mx-auto">
+            Your message will be securely transmitted via WhatsApp.
+
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
           {/* Contact Information */}
-          <div className="space-y-8 bg-white p-8 rounded-xl shadow-md border border-gray-200 animate-bottom-up">
-            <div>
-              <h3 className="text-xl font-semibold mb-6 border-b border-gray-200 pb-2 text-gray-900">Contact Information</h3>
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="bg-gray-100 p-3 rounded-full">
-                    <MapPin className="w-6 h-6 text-gray-800" />
-                  </div>
-                  <span className="text-gray-700">GK Nagar, 2nd St, Manthithoppu rd, Kovilpatti, Tamil Nadu 628501</span>
+          <div className="lg:col-span-4 space-y-8 animate-bottom-up">
+            <div className="corner-panel p-10">
+              <div className="corner-accent top-left" />
+              <div className="corner-accent top-right" />
+              <div className="corner-accent bottom-left" />
+              <div className="corner-accent bottom-right" />
+
+              <h3 className="text-[14px] text-white/40 tracking-[0.2em] mb-14 font-bold border-b border-white/[0.05] pb-4">Hardware Access</h3>
+
+              <div className="space-y-16">
+                <div className="group/item">
+                  <p className="text-[13px] text-white/40 tracking-[0.1em] mb-4 font-semibold">Base Location</p>
+                  <p className="text-white/80 text-[16px] leading-relaxed tracking-wide font-light">
+                    GK Nagar, 2nd St, Manthithoppu Rd, Kovilpatti, TN 628501
+                  </p>
                 </div>
-                <div className="flex items-center space-x-4">
-                  <div className="bg-gray-100 p-3 rounded-full">
-                    <Phone className="w-6 h-6 text-gray-800" />
-                  </div>
-                  <span className="text-gray-700"><a href="tel:+91 63748 76357">+91 63748 76357</a></span>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="bg-gray-100 p-3 rounded-full">
-                    <Mail className="w-6 h-6 text-gray-800" />
-                  </div>
-                  <span className="text-gray-700"><a href="mailto:wepromoters23@gmail.com">wepromoters23@gmail.com</a></span>
+
+                <div className="group/item">
+                  <p className="text-[13px] text-white/40 tracking-[0.1em] mb-4 font-semibold">Comms Channel</p>
+                  <a href="tel:+916374876357" className="text-white/90 text-[16px] hover:text-white transition-all block tracking-wide font-light">
+                    +91 63748 76357
+                  </a>
+                  <a href="mailto:wepromoters23@gmail.com" className="text-white/90 text-[16px] hover:text-white transition-all block mt-3 tracking-wide font-light">
+                    wepromoters23@gmail.com
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
           {/* Contact Form */}
-          <form ref={formRef} onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-xl shadow-md border border-gray-200 animate-bottom-up" noValidate>
-            <h3 className="text-xl font-semibold mb-6 border-b border-gray-200 pb-2 text-gray-900">Send Us a Message</h3>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                  Name
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  className={`w-full px-4 py-3 border ${errors.name ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
+          <div className="lg:col-span-8 corner-panel p-10 sm:p-14 animate-bottom-up" style={{ animationDelay: '0.1s' }}>
+            <div className="corner-accent top-left" />
+            <div className="corner-accent top-right" />
+            <div className="corner-accent bottom-left" />
+            <div className="corner-accent bottom-right" />
+
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-12" noValidate>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+                <div className="space-y-3">
+                  <label htmlFor="name">Full Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Wade Warren"
+                    className="w-full"
+                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
+                    required
+                  />
+                  {errors.name && <div className="custom-error">{errors.name}</div>}
+                </div>
+                <div className="space-y-3">
+                  <label htmlFor="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="+91 9876543210"
+                    className="w-full"
+                    onChange={handleInputChange}
+                    onBlur={handleInputChange}
+                    required
+                  />
+                  {errors.phone && <div className="custom-error">{errors.phone}</div>}
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                <label htmlFor="service">What Service You Are Looking For?</label>
+                <select
+                  id="service"
+                  name="service"
+                  className="w-full"
                   onChange={handleInputChange}
                   onBlur={handleInputChange}
                   required
-                />
-                {errors.name && <div className="text-red-500 text-sm mt-1 custom-error">{errors.name}</div>}
+                >
+                  <option value="" disabled selected>Initialization required...</option>
+                  {services.map((service) => (
+                    <option key={service.id} value={service.title}>
+                      {service.title}
+                    </option>
+                  ))}
+                </select>
+                {errors.service && <div className="custom-error">{errors.service}</div>}
               </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  className={`w-full px-4 py-3 border ${errors.email ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
-                  onChange={handleInputChange}
-                  onBlur={handleInputChange}
-                  required
-                />
-                {errors.email && <div className="text-red-500 text-sm mt-1 custom-error">{errors.email}</div>}
-              </div>
-            </div>
 
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                className={`w-full px-4 py-3 border ${errors.phone ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
-                onChange={handleInputChange}
-                onBlur={handleInputChange}
-              />
-              {errors.phone && <div className="text-red-500 text-sm mt-1 custom-error">{errors.phone}</div>}
-            </div>
-
-            <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={4}
-                className={`w-full px-4 py-3 border ${errors.message ? 'border-red-500 has-error' : 'border-gray-300'} rounded-lg focus:ring-gray-500 focus:border-gray-500 bg-gray-50`}
-                onChange={handleInputChange}
-                onBlur={handleInputChange}
-                required
-              ></textarea>
-              {errors.message && <div className="text-red-500 text-sm mt-1 custom-error">{errors.message}</div>}
-            </div>
-
-            {/* Full width button wrapper */}
-            <StyledWrapper>
               <button
                 type="submit"
                 disabled={isLoading}
-                className="flex items-center justify-center space-x-2"
+                className="tech-button"
               >
                 {isLoading ? (
-                  <>
-                    <span style={{ visibility: 'hidden' }}>Send Message</span>
-                    <div className="loading-overlay">
-                      <div className="spinner"></div>
-                    </div>
-                  </>
+                  <div className="flex justify-center"><div className="spinner !border-gray-800 !border-t-transparent" /></div>
                 ) : (
-                  <>
-                    <span>Send Message</span>
-                    <span className="relative transition-all duration-300 group-hover:translate-x-1">
-                      <Mail className="h-4 w-4 sm:h-5 sm:w-5" />
-                    </span>
-                  </>
+                  <div className="flex items-center gap-3">
+                    Grow With Us
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send">
+                      <line x1="22" y1="2" x2="11" y2="13"></line>
+                      <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                    </svg>
+                  </div>
                 )}
               </button>
-            </StyledWrapper>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
 
       {messageStatus === 'success' && (
         <div className="message success">
-          <svg className="tick-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M9 16.17l-3.5-3.5a1.5 1.5 0 0 1 2.12-2.12l2.38 2.38 6.38-6.38a1.5 1.5 0 0 1 2.12 2.12l-8.5 8.5a1.5 1.5 0 0 1-2.12 0z" />
-          </svg>
-          Your message has been sent successfully!
+          Data Received. Acknowledged.
         </div>
       )}
       {messageStatus === 'error' && (
         <div className="message error">
-          Failed to send your message. Please try again later.
+          Link Failed. Retry.
         </div>
       )}
     </section>

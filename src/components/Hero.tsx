@@ -11,12 +11,12 @@ const Hero = () => {
     if (title) {
       title.classList.add('animate-writing');
     }
-    
+
     const description = document.getElementById('fade-description');
     if (description) {
       description.classList.add('animate-fade');
     }
-    
+
     // Add scroll event listener for navbar transformation
     const handleScroll = () => {
       if (window.scrollY > 20) {
@@ -25,7 +25,7 @@ const Hero = () => {
         setScrolled(false);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -49,7 +49,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Enhanced Floating Navigation */}
       <div className="relative z-50">
         <div className="max-w-7xl mx-auto">
@@ -58,14 +58,14 @@ const Hero = () => {
             <div className="flex justify-between items-center px-6 sm:px-8 py-4 mx-auto">
               <div className="flex items-center">
                 <a href="#" className="flex items-center">
-                  <img 
-                    src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png" 
-                    alt="We Promoters Logo" 
+                  <img
+                    src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png"
+                    alt="We Promoters Logo"
                     className="h-8 w-auto sm:h-8 md:h-10 object-contain transition-all duration-300"
                   />
                 </a>
               </div>
-              
+
               {/* Desktop Navigation - Enhanced with hover effects */}
               <nav className="hidden lg:block">
                 <ul className="flex space-x-8">
@@ -75,7 +75,7 @@ const Hero = () => {
                   <li><a href="#contact" className="text-white text-sm hover:text-gray-300 transition-colors relative nav-link">Contact</a></li>
                 </ul>
               </nav>
-              
+
               {/* Tablet Navigation - Medium screens only */}
               <nav className="hidden md:block lg:hidden">
                 <ul className="flex space-x-6">
@@ -85,10 +85,10 @@ const Hero = () => {
                   <li><a href="#contact" className="text-white hover:text-gray-300 text-xs">Contact</a></li>
                 </ul>
               </nav>
-              
+
               {/* Mobile Navigation Toggle - Enhanced animation */}
               <div className="md:hidden">
-                <button 
+                <button
                   onClick={toggleMobileMenu}
                   className="text-white focus:outline-none w-8 h-6 relative"
                   aria-label="Toggle mobile menu"
@@ -101,12 +101,11 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Mobile Navigation Menu - Fixed positioning issue */}
-          <div 
-            className={`md:hidden fixed inset-0 z-40 backdrop-blur-md bg-black bg-opacity-90 transition-all duration-300 ease-in-out ${
-              mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
-            }`}
+          <div
+            className={`md:hidden fixed inset-0 z-40 backdrop-blur-md bg-black bg-opacity-90 transition-all duration-300 ease-in-out ${mobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+              }`}
             style={{ top: '0', height: '100%' }}
           >
             <div className="px-6 py-20 space-y-4 flex flex-col h-full mt-6">
@@ -114,7 +113,7 @@ const Hero = () => {
               <a href="#work" className="text-white block py-3 text-base font-medium border-b border-gray-800 hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>Our work</a>
               <a href="#services" className="text-white block py-3 text-base font-medium border-b border-gray-800 hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>Services</a>
               <a href="#contact" className="text-white block py-3 text-base font-medium hover:pl-2 transition-all duration-200" onClick={toggleMobileMenu}>Contact</a>
-              
+
               {/* Mobile menu additional content */}
               {/* <div className="mt-auto pt-8 border-t border-gray-800">
                 <p className="text-gray-400 text-xs mb-4">Need immediate assistance?</p>
@@ -126,7 +125,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
+
       {/* Hero Content - Full Screen with Vertical Center Alignment */}
       <div className="relative z-10 h-full flex items-center justify-center">
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
@@ -142,26 +141,27 @@ const Hero = () => {
               We help brands stand out with smart, scalable and digital marketing strategies. From Startups to Top performers - We promote what matters.
             </p>
             <a href="#work">
-            <div className="flex justify-center">
-              {/* New styled button replacing the previous one */}
-              <StyledWrapper>
-                <button className="flex items-center space-x-2" id="#work">
-                  <span>View our works</span>
-                  <span className="relative transition-all duration-300 group-hover:translate-x-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
-                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                    </svg>
-                  </span>
-                </button>
-              </StyledWrapper>
-            </div>
+              <div className="flex justify-center">
+                {/* New styled button replacing the previous one */}
+                <StyledWrapper>
+                  <button className="flex items-center space-x-2" id="#work">
+                    <span>View our works</span>
+                    <span className="relative transition-all duration-300 group-hover:translate-x-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 sm:h-5 sm:w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                  </button>
+                </StyledWrapper>
+              </div>
             </a>
           </div>
         </div>
       </div>
 
       {/* CSS for animations and responsive design */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes typing {
           from { width: 0 }
           to { width: 100% }
