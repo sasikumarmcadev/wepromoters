@@ -13,7 +13,7 @@ const OurClients = () => {
     const handleResize = () => {
       const width = window.innerWidth;
       if (width < 640) { // Mobile
-        setDimensions({ height: 45, gap: 35 });
+        setDimensions({ height: 55, gap: 40 });
       } else if (width < 1024) { // Tablet
         setDimensions({ height: 70, gap: 60 });
       } else { // Desktop

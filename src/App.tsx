@@ -10,7 +10,7 @@ import Ourwork from './components/Ourwork';
 import OurServices from './components/OurServices';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import CustomCursor from './components/CustomCursor';
+
 
 const App: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
@@ -36,7 +36,7 @@ const App: React.FC = () => {
 
   return (
     <>
-      <CustomCursor />
+
       <ReactLenis root options={{ lerp: 0.12, duration: 1.2, smoothWheel: true }}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="min-h-screen bg-background text-white relative">
