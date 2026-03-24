@@ -1,8 +1,7 @@
 import { useRef, useState } from 'react';
-import emailjs from '@emailjs/browser';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 import { services } from './OurServices';
-import { Mail, Phone, MapPin, Send, Cpu, CheckCircle2, AlertCircle } from 'lucide-react';
+import { Mail, Phone, Send, Cpu, CheckCircle2, AlertCircle } from 'lucide-react';
 
 const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -59,29 +58,41 @@ const Contact = () => {
     if (nameError || phoneError || serviceError) return;
 
     setIsLoading(true);
-    emailjs.sendForm('service_22avx9f', 'template_2swvm4n', formRef.current, {
-      publicKey: 'IgaNUVa1a-jAGwcIr',
-    })
-      .then(() => {
-        setMessageStatus('success');
-        formRef.current?.reset();
-        setErrors({ name: '', phone: '', service: '' });
-        setTimeout(() => setMessageStatus(null), 5000);
-      }, (error) => {
-        console.error('EmailJS Error:', error);
-        setMessageStatus('error');
-      })
-      .finally(() => setIsLoading(false));
+    
+    const message = `🚀 *THEADORA MEDIA | NEW MISSION INQUIRY*\n\n` +
+                    `Hello Team, I'm interested in collaborating on a new digital project.\n\n` +
+                    `👤 *CLIENT PROFILE*\n` +
+                    `• *Name:* ${nameInput.value}\n` +
+                    `• *Contact:* ${phoneInput.value}\n\n` +
+                    `🎯 *STRATEGIC PATH*\n` +
+                    `• *Service:* ${serviceInput.value}\n\n` +
+                    `---\n` +
+                    `_Sent from the Official Adora Website_`;
+    
+    const whatsappUrl = `https://wa.me/916374876357?text=${encodeURIComponent(message)}`;
+    
+    try {
+      window.open(whatsappUrl, '_blank');
+      setMessageStatus('success');
+      formRef.current?.reset();
+      setErrors({ name: '', phone: '', service: '' });
+      setTimeout(() => setMessageStatus(null), 5000);
+    } catch (error) {
+      console.error('WhatsApp Error:', error);
+      setMessageStatus('error');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
   };
 
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { y: 20, opacity: 0 },
-    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } }
+    visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } }
   };
 
   return (
@@ -103,91 +114,103 @@ const Contact = () => {
           whileInView="visible"
           viewport={{ once: true }}
           variants={containerVariants}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 sm:gap-16 lg:gap-24 lg:items-stretch"
         >
           {/* Header & Sidebar */}
-          <div className="lg:col-span-5 space-y-16">
+          <div className="lg:col-span-5 flex flex-col justify-between space-y-10 md:space-y-12 lg:space-y-0">
             <motion.div variants={itemVariants} className="space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-medium tracking-tight text-white/40">
                 <span className="size-1.5 rounded-full bg-white/40" />
                 Connectivity
               </div>
-              <h2 className="text-4xl sm:text-6xl md:text-8xl tracking-tighter leading-[0.9]  text-white">
-                Initialize <br />
-                <span className="text-white/10 italic">Growth.</span>
-              </h2>
-              <p className="text-white/40 text-lg sm:text-xl font-light leading-relaxed max-w-sm">
+              <div className="overflow-hidden">
+                <motion.h2
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+                  className="text-3xl sm:text-5xl md:text-6xl tracking-tighter leading-[1.1] text-white"
+                >
+                  Initialize <br />
+                  <span className="text-white/10 italic">Growth.</span>
+                </motion.h2>
+              </div>
+              <p className="text-white/40 text-sm sm:text-lg font-light leading-relaxed max-w-sm">
                 Ready to architecturalize your digital transformation? Let's synergize.
               </p>
             </motion.div>
 
-            <motion.div variants={itemVariants} className="space-y-6">
+            <motion.div variants={itemVariants} className="space-y-8 md:space-y-10 lg:space-y-12">
               {[
-                { icon: MapPin, label: 'Coordinates', value: 'GK Nagar, 2nd St, Manthithoppu Rd, Kovilpatti, TN 628501', href: null },
-                { icon: Phone, label: 'Voice Link', value: '+91 63748 76357', href: 'tel:+916374876357' },
-                { icon: Mail, label: 'Data Hub', value: 'wepromoters23@gmail.com', href: 'mailto:wepromoters23@gmail.com' }
+                { icon: Phone, label: 'phone no', value: '+91 63748 76357', href: 'tel:+916374876357' },
+                { icon: Mail, label: 'Email', value: 'Theadoramedia@gmail.com', href: 'mailto:Theadoramedia@gmail.com' }
               ].map((item, idx) => (
-                <div key={idx} className="group relative p-6 rounded-2xl bg-white/[0.01] border border-white/[0.05] hover:border-white/10 transition-all duration-500 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <div className="flex items-start gap-4 relative z-10">
+                <motion.div
+                  key={idx}
+                  whileHover={{ x: 10 }}
+                  className="group flex items-start gap-8 transition-colors"
+                >
+                  <div className="relative mt-1">
                     <div className="p-3 bg-white/[0.03] rounded-xl group-hover:bg-white/10 transition-colors">
-                      <item.icon className="w-5 h-5 text-white/40 group-hover:text-white transition-colors" />
-                    </div>
-                    <div>
-                      <h4 className="text-[10px] font-bold tracking-[0.3em] text-white/20 uppercase mb-1">{item.label}</h4>
-                      {item.href ? (
-                        <a href={item.href} className="text-white/60 group-hover:text-white transition-colors font-light text-sm tracking-wide">
-                          {item.value}
-                        </a>
-                      ) : (
-                        <p className="text-white/60 font-light text-sm tracking-wide leading-relaxed">{item.value}</p>
-                      )}
+                      <item.icon className="w-6 h-6 text-white/30 group-hover:text-white transition-colors" />
                     </div>
                   </div>
-                </div>
+                  <div className="flex flex-col gap-1">
+                    <h4 className="text-[11px] font-medium tracking-[0.3em] uppercase text-white/20 transition-colors group-hover:text-white/40">
+                      {item.label}
+                    </h4>
+                    {item.href ? (
+                      <a href={item.href} className="text-white/60 group-hover:text-white transition-colors font-light text-base sm:text-xl lg:text-2xl tracking-tight leading-none">
+                        {item.value}
+                      </a>
+                    ) : (
+                      <p className="text-white/60 font-light text-base sm:text-xl lg:text-2xl tracking-tight leading-none">{item.value}</p>
+                    )}
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
           </div>
 
           {/* Form Section */}
           <motion.div variants={itemVariants} className="lg:col-span-7">
-            <div className="relative p-[1px] rounded-[2.5rem] bg-gradient-to-br from-white/[0.1] to-transparent">
-              <div className="relative bg-[#080808] rounded-[2.4rem] p-8 sm:p-12 md:p-16 overflow-hidden">
-                <form ref={formRef} onSubmit={handleSubmit} className="space-y-12 relative z-10" noValidate>
+            <div className="relative p-[1px] rounded-3xl bg-gradient-to-br from-white/[0.1] to-transparent">
+              <div className="relative bg-[#080808] rounded-[1.4rem] p-8 sm:p-10 md:p-14 overflow-hidden">
+                <form ref={formRef} onSubmit={handleSubmit} className="space-y-8 md:space-y-12 relative z-10" noValidate>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
                     <div className="space-y-4">
-                      <label className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase pl-1">Identification</label>
+                      <label className="text-sm font-medium tracking-tight text-white/50 pl-1">Identification</label>
                       <input
                         type="text"
                         name="name"
-                        placeholder="ALEX MERCER"
-                        className="w-full bg-white/[0.02] border border-white/[0.08] rounded-2xl px-6 py-5 text-white placeholder:text-white/10 focus:border-white/20 focus:bg-white/[0.04] focus:outline-none transition-all duration-500"
+                        placeholder="Alex Mercer"
+                        className="w-full bg-white/[0.02] border border-white/[0.08] rounded-xl px-6 py-5 text-white placeholder:text-white/10 focus:border-white/20 focus:bg-white/[0.04] focus:outline-none transition-all duration-500"
                         onChange={handleInputChange}
                         required
                       />
-                      {errors.name && <p className="text-red-500/40 text-[9px] uppercase tracking-widest pl-1">{errors.name}</p>}
+                      {errors.name && <p className="text-red-500/40 text-[9px] tracking-widest pl-1">{errors.name}</p>}
                     </div>
 
                     <div className="space-y-4">
-                      <label className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase pl-1">Secure Line</label>
+                      <label className="text-sm font-medium tracking-tight text-white/50 pl-1">Secure Line</label>
                       <input
                         type="tel"
                         name="phone"
                         placeholder="+91 00000 00000"
-                        className="w-full bg-white/[0.02] border border-white/[0.08] rounded-2xl px-6 py-5 text-white placeholder:text-white/10 focus:border-white/20 focus:bg-white/[0.04] focus:outline-none transition-all duration-500"
+                        className="w-full bg-white/[0.02] border border-white/[0.08] rounded-xl px-6 py-5 text-white placeholder:text-white/10 focus:border-white/20 focus:bg-white/[0.04] focus:outline-none transition-all duration-500"
                         onChange={handleInputChange}
                         required
                       />
-                      {errors.phone && <p className="text-red-500/40 text-[9px] uppercase tracking-widest pl-1">{errors.phone}</p>}
+                      {errors.phone && <p className="text-red-500/40 text-[9px] tracking-widest pl-1">{errors.phone}</p>}
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <label className="text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase pl-1">Strategic Path</label>
+                    <label className="text-sm font-medium tracking-tight text-white/50 pl-1">Strategic Path</label>
                     <div className="relative">
                       <select
                         name="service"
-                        className="w-full bg-white/[0.02] border border-white/[0.08] rounded-2xl px-6 py-5 text-white appearance-none cursor-pointer focus:border-white/20 focus:bg-white/[0.04] focus:outline-none transition-all duration-500"
+                        className="w-full bg-white/[0.02] border border-white/[0.08] rounded-xl px-6 py-5 text-white appearance-none cursor-pointer focus:border-white/20 focus:bg-white/[0.04] focus:outline-none transition-all duration-500"
                         onChange={handleInputChange}
                         required
                         defaultValue=""
@@ -201,14 +224,14 @@ const Contact = () => {
                       </select>
                       <Cpu className="absolute right-6 top-1/2 -translate-y-1/2 w-4 h-4 text-white/20 pointer-events-none" />
                     </div>
-                    {errors.service && <p className="text-red-500/40 text-[9px] uppercase tracking-widest pl-1">{errors.service}</p>}
+                    {errors.service && <p className="text-red-500/40 text-[9px] tracking-widest pl-1">{errors.service}</p>}
                   </div>
 
                   <motion.button
                     whileHover={{ scale: 1.01, y: -2 }}
                     whileTap={{ scale: 0.99 }}
                     disabled={isLoading}
-                    className="relative w-full group py-6 px-10 rounded-2xl bg-white text-black font-black uppercase tracking-[0.4em] text-[10px] flex items-center justify-center gap-4 transition-all duration-500 disabled:opacity-50 overflow-hidden"
+                    className="relative w-full group py-6 px-10 rounded-xl bg-white text-black font-bold tracking-tight text-sm flex items-center justify-center gap-4 transition-all duration-500 disabled:opacity-50 overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-black/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
                     {isLoading ? "Synchronizing..." : (
@@ -241,7 +264,7 @@ const Contact = () => {
               {messageStatus === 'success' ? <CheckCircle2 className="w-5 h-5" /> : <AlertCircle className="w-5 h-5" />}
             </div>
             <div className="flex flex-col">
-              <span className="text-[11px] font-bold uppercase tracking-widest opacity-50 mb-0.5">
+              <span className="text-[11px] font-bold tracking-widest opacity-50 mb-0.5">
                 System Status
               </span>
               <span className="text-sm font-light tracking-wide">

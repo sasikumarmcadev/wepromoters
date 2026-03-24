@@ -70,12 +70,12 @@ const useImageLoader = (seqRef: React.RefObject<HTMLElement>, onLoad: () => void
 };
 
 const useAnimationLoop = (
-  trackRef: React.RefObject<HTMLElement>, 
-  targetVelocity: number, 
-  seqWidth: number, 
-  seqHeight: number, 
-  isHovered: boolean, 
-  hoverSpeed: number | undefined, 
+  trackRef: React.RefObject<HTMLElement>,
+  targetVelocity: number,
+  seqWidth: number,
+  seqHeight: number,
+  isHovered: boolean,
+  hoverSpeed: number | undefined,
   isVertical: boolean
 ) => {
   const rafRef = useRef<number | null>(null);
@@ -313,7 +313,7 @@ export const LogoLoop = memo(
               'inline-flex items-center',
               'motion-reduce:transition-none',
               scaleOnHover &&
-                'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120'
+              'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120'
             )}
             aria-hidden={!!item.href && !item.ariaLabel}
           >
@@ -327,7 +327,7 @@ export const LogoLoop = memo(
               '[image-rendering:-webkit-optimize-contrast]',
               'motion-reduce:transition-none',
               scaleOnHover &&
-                'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120',
+              'transition-transform duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] group-hover/item:scale-120',
               'grayscale opacity-60 group-hover/item:grayscale-0 group-hover/item:opacity-100 transition-all duration-700'
             )}
             src={item.src}
@@ -412,13 +412,13 @@ export const LogoLoop = memo(
 
     const maskStyle = fadeOut
       ? {
-          WebkitMaskImage: isVertical
-            ? 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-            : 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
-          maskImage: isVertical
-            ? 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
-            : 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'
-        }
+        WebkitMaskImage: isVertical
+          ? 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
+          : 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)',
+        maskImage: isVertical
+          ? 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)'
+          : 'linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%)'
+      }
       : {};
 
     return (

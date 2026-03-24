@@ -95,7 +95,7 @@ const Navbar = () => {
                       : "text-white/40 hover:text-white"
                   )}
                 >
-                  <span className="relative z-10 whitespace-nowrap uppercase">{link.name}</span>
+                  <span className="relative z-10 whitespace-nowrap">{link.name}</span>
                 </a>
               );
             })}

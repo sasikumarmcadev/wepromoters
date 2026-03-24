@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useLenis } from '@studio-freight/react-lenis';
 
 const Footer = () => {
@@ -76,18 +76,11 @@ const Footer = () => {
           <div className="footer-animate opacity-0 flex flex-col items-start text-left" style={{ animationDelay: '0.4s' }}>
             <h3 className="text-xl font-bold mb-6">Contact</h3>
             <address className="text-gray-300 not-italic space-y-4">
-              <p className="flex items-start justify-start">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 mt-1 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span>GK Nagar, 2nd St, Manthithoppu rd, Kovilpatti, TN 628501</span>
-              </p>
               <p className="flex items-center justify-start">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:wepromoters23@gmail.com" className="hover:text-white transition-colors">wepromoters23@gmail.com</a>
+                <a href="mailto:Theadoramedia@gmail.com" className="hover:text-white transition-colors">Theadoramedia@gmail.com</a>
               </p>
               <p className="flex items-center justify-start">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -103,8 +96,8 @@ const Footer = () => {
         {/* Copyright Area */}
         <div className="text-center text-gray-500 mt-12 py-8 border-t border-white/[0.03] relative z-20">
           <div className="footer-animate opacity-0" style={{ animationDelay: '0.8s' }}>
-            <p className="text-xs uppercase tracking-[0.2em] font-medium">
-              © {currentYear} ALL RIGHTS RESERVED. <span className="text-gray-700">DEVELOPED BY <a href="https://sasikumarmca.vercel.app/" target='_blank' className="hover:text-white transition-colors">SASIKUMAR</a>.</span>
+            <p className="text-xs tracking-[0.2em] font-medium text-gray-500">
+              © {currentYear} All rights reserved. <span className="text-gray-700">Developed by <a href="https://www.nextriadsolutions.in" target='_blank' className="hover:text-white transition-colors">Nextriad Solutions</a>.</span>
             </p>
           </div>
         </div>
@@ -112,8 +105,8 @@ const Footer = () => {
 
       {/* Massive Background Branding */}
       <div className="absolute bottom-0 left-0 w-full overflow-hidden pointer-events-none z-0">
-        <h1 className="text-[25vw] font-black uppercase tracking-tighter leading-none mb-[-5vw] text-white/[0.04] select-none text-center">
-          ADORA
+        <h1 className="text-[25vw] font-black tracking-tighter leading-none mb-[-5vw] text-white/[0.04] select-none text-center">
+          Adora
         </h1>
       </div>
 

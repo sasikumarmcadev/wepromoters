@@ -37,24 +37,26 @@ export default function DottedHero() {
 						/>
 					</motion.div>
 
-					<div className="mt-6 sm:mt-8 flex flex-col items-center justify-center space-y-3 w-full">
-						<motion.p 
-							initial={{ opacity: 0, y: 10 }}
-							animate={{ opacity: 1, y: 0 }}
-							transition={{ delay: 0.5, duration: 1, ease: [0.23, 1, 0.32, 1] }}
-							className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[-0.04em] text-white uppercase text-center leading-tight"
-						>
-							Digital Marketing Agency
-						</motion.p>
+					<div className="mt-6 sm:mt-8 flex flex-col items-center justify-center space-y-4 w-full">
+						<div className="overflow-hidden py-1">
+							<motion.p 
+								initial={{ y: "100%" }}
+								animate={{ y: 0 }}
+								transition={{ delay: 0.5, duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+								className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[-0.04em] text-white uppercase text-center leading-[1.1]"
+							>
+								Digital Marketing Agency
+							</motion.p>
+						</div>
 						
 						<motion.div
-							initial={{ opacity: 0 }}
-							animate={{ opacity: 1 }}
-							transition={{ delay: 1, duration: 1.5 }}
+							initial={{ opacity: 0, y: 10 }}
+							animate={{ opacity: 1, y: 0 }}
+							transition={{ delay: 1, duration: 1.5, ease: [0.23, 1, 0.32, 1] }}
 							className="flex items-center gap-3 sm:gap-4"
 						>
 							<div className="h-px w-6 sm:w-12 bg-white/20" />
-							<p className="text-[9px] sm:text-sm md:text-base font-bold tracking-[0.2em] sm:tracking-[0.4em] text-white/40 text-center">
+							<p className="text-[9px] sm:text-sm md:text-base font-bold tracking-[0.2em] sm:tracking-[0.4em] text-white/40 text-center uppercase">
 								We convert business into brand
 							</p>
 							<div className="h-px w-6 sm:w-12 bg-white/20" />

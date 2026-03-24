@@ -91,7 +91,7 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
 
   useEffect(() => {
     const checkMobile = () => window.innerWidth < 768;
-    
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (checkMobile()) {
@@ -199,7 +199,7 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
             z: isHovered ? 60 : 0
           }}
         >
-          <h3 className="text-xl sm:text-2xl font-bold text-white uppercase tracking-tight leading-tight mb-6">
+          <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-tight mb-6">
             {service.title}
           </h3>
         </motion.div>
@@ -277,13 +277,20 @@ const OurServices = () => {
           "transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col items-end text-right",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
         )}>
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/60 mb-4">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold tracking-[0.2em] text-white/60 mb-4">
             <span className="size-1.5 rounded-full bg-white animate-pulse" />
             Solutions
           </span>
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-none uppercase">
-            Our <span className="text-white/20">Services.</span>
-          </h2>
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ y: "100%" }}
+              animate={isVisible ? { y: 0 } : {}}
+              transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
+              className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-none"
+            >
+              Our <span className="text-white/20">Services.</span>
+            </motion.h2>
+          </div>
         </div>
       </div>
 
