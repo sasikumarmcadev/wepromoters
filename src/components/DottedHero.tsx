@@ -39,14 +39,14 @@ export default function DottedHero() {
 
 					<div className="mt-6 sm:mt-8 flex flex-col items-center justify-center space-y-4 w-full">
 						<div className="overflow-hidden py-1">
-							<motion.p 
+							<motion.h1 
 								initial={{ y: "100%" }}
 								animate={{ y: 0 }}
 								transition={{ delay: 0.5, duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
 								className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[-0.04em] text-white uppercase text-center leading-[1.1]"
 							>
-								Digital Marketing Agency
-							</motion.p>
+								Digital Marketing Agency <br /> in Kovilpatti
+							</motion.h1>
 						</div>
 						
 						<motion.div

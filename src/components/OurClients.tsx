@@ -52,7 +52,7 @@ const OurClients = () => {
       {/* Large Background Text */}
       <div className="absolute top-12 md:top-16 left-0 w-full pointer-events-none select-none overflow-hidden flex justify-start z-0">
         <h2 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-black uppercase leading-[0.8] text-white/[0.02] tracking-tighter w-full text-left pl-6 md:pl-0 -ml-[2px] md:ml-0">
-          Clients
+          Trusted
         </h2>
       </div>
 
@@ -61,7 +61,7 @@ const OurClients = () => {
           <div className="flex flex-col items-start text-left mb-20">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/60 mb-4">
               <span className="size-1.5 rounded-full bg-white animate-pulse" />
-              Trusted By
+              Kovilpatti Trusted By
             </span>
             <h3 className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-none uppercase">
               Our <span className="text-white/20">Clients</span>

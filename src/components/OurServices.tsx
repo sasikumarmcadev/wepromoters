@@ -24,7 +24,7 @@ export const services = [
   {
     id: 1,
     title: 'Website & Software Development',
-    description: 'We design and develop modern, high-performance websites and software solutions tailored to your business needs. From stunning visuals to seamless functionality, we ensure your digital presence is powerful, user-friendly, and conversion-focused.',
+    description: 'Transform your business with Kovilpatti\'s top digital agency. We build custom, high-performance websites and software solutions that drive real results.',
     icon: Code2
   },
 
@@ -49,7 +49,7 @@ export const services = [
   {
     id: 5,
     title: 'SEO',
-    description: 'Our SEO strategies help your business appear on top of search results, bringing consistent organic traffic and long-term growth.',
+    description: 'Dominate search results in Kovilpatti and beyond. Our strategic SEO services increase organic traffic, brand visibility, and long-term business growth.',
     icon: BarChart3
   },
   {
@@ -67,7 +67,7 @@ export const services = [
   {
     id: 8,
     title: 'Meta & Google Ads',
-    description: 'We create and manage high-performing ad campaigns across Meta (Facebook & Instagram) and Google to help your business reach the right audience at the right time. Our strategies are focused on generating leads, increasing sales, and maximizing your return on investment.',
+    description: 'Reach your target audience with high-ROI ad campaigns. We manage Meta and Google Ads specifically optimized for your unique conversion goals and business ROI.',
     icon: BarChart3
   },
 ];
@@ -267,7 +267,7 @@ const OurServices = () => {
       {/* Large Background Text */}
       <div className="absolute top-12 md:top-16 right-0 w-full pointer-events-none select-none overflow-hidden flex justify-end z-0">
         <h2 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-black uppercase leading-[0.8] text-white/[0.02] tracking-tighter w-full text-right pr-6 md:pr-0 -mr-[2px] md:mr-0">
-          Expertise
+          Kovilpatti
         </h2>
       </div>
 
@@ -288,7 +288,7 @@ const OurServices = () => {
               transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
               className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-none"
             >
-              Our <span className="text-white/20">Services.</span>
+              Our <span className="text-white/20">Digital Services.</span>
             </motion.h2>
           </div>
         </div>
