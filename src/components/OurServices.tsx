@@ -23,11 +23,10 @@ interface Service {
 export const services = [
   {
     id: 1,
-    title: 'Website & Software Development',
-    description: 'Transform your business with Kovilpatti\'s top digital agency. We build custom, high-performance websites and software solutions that drive real results.',
-    icon: Code2
+    title: 'Video Editing',
+    description: 'We transform your raw videos into engaging, high-quality content that captures attention instantly. Every edit is crafted to boost engagement, retention, and brand value.',
+    icon: Video
   },
-
   {
     id: 2,
     title: 'Long Form Video Editing',
@@ -49,7 +48,7 @@ export const services = [
   {
     id: 5,
     title: 'SEO',
-    description: 'Dominate search results in Kovilpatti and beyond. Our strategic SEO services increase organic traffic, brand visibility, and long-term business growth.',
+    description: 'Our SEO strategies help your business appear on top of search results, bringing consistent organic traffic and long-term growth.',
     icon: BarChart3
   },
   {
@@ -60,15 +59,15 @@ export const services = [
   },
   {
     id: 7,
-    title: 'Video Editing',
-    description: 'We transform your raw videos into engaging, high-quality content that captures attention instantly. Every edit is crafted to boost engagement, retention, and brand value.',
-    icon: Video
+    title: 'Website & Software Development',
+    description: 'We design and develop modern, high-performance websites and software solutions tailored to your business needs. From stunning visuals to seamless functionality, we ensure your digital presence is powerful, user-friendly, and conversion-focused.',
+    icon: Code2
   },
   {
     id: 8,
     title: 'Meta & Google Ads',
-    description: 'Reach your target audience with high-ROI ad campaigns. We manage Meta and Google Ads specifically optimized for your unique conversion goals and business ROI.',
-    icon: BarChart3
+    description: 'We create and manage high-performing ad campaigns across Meta (Facebook & Instagram) and Google to help your business reach the right audience at the right time. Our strategies are focused on generating leads, increasing sales, and maximizing your return on investment.',
+    icon: Megaphone
   },
 ];
 
@@ -264,12 +263,6 @@ const OurServices = () => {
     >
       <ParticlesBackground />
 
-      {/* Large Background Text */}
-      <div className="absolute top-12 md:top-16 right-0 w-full pointer-events-none select-none overflow-hidden flex justify-end z-0">
-        <h2 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-black uppercase leading-[0.8] text-white/[0.02] tracking-tighter w-full text-right pr-6 md:pr-0 -mr-[2px] md:mr-0">
-          Kovilpatti
-        </h2>
-      </div>
 
       {/* Top Header Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20">

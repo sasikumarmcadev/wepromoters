@@ -461,7 +461,7 @@ const OurWork: React.FC = () => {
       {/* Large Background Text */}
       <div className="absolute top-12 md:top-16 left-0 w-full pointer-events-none select-none overflow-hidden flex justify-start z-0">
         <h2 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-black uppercase leading-[0.8] text-white/[0.02] tracking-tighter w-full text-left pl-6 md:pl-0 -ml-[2px] md:ml-0">
-          Kovilpatti
+          Showcase
         </h2>
       </div>
 

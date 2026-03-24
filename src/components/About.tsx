@@ -109,7 +109,7 @@ const About: React.FC = () => {
                     transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
                     className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-[1.1]"
                   >
-                    Kovilpatti's Leading <br />
+                    Digital <br />
                     <span className="text-white/10 italic">Marketing Experts.</span>
                   </motion.h2>
                 </div>
@@ -117,7 +117,7 @@ const About: React.FC = () => {
 
               <div className={`transition-all duration-1000 delay-200 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <p className="text-sm sm:text-base text-white/50 leading-relaxed font-light max-w-xl">
-                  Welcome to Adora, your dedicated partner in digital transformation based in Kovilpatti. We blend deep strategic insight with fearless creativity to help brands thrive in a complex digital landscape.
+                  Welcome to Adora, your dedicated partner in digital transformation. We blend deep strategic insight with fearless creativity to help brands thrive in a complex digital landscape.
                 </p>
                 <p className="mt-6 text-[13px] sm:text-sm text-white/30 leading-relaxed font-light max-w-xl">
                   From SEO and high-conversion ad campaigns to viral content strategies, we deliver data-driven results that move the needle. Our mission is to amplify your vision through transparent communication and innovative execution.

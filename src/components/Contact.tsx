@@ -131,12 +131,12 @@ const Contact = () => {
                   transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
                   className="text-3xl sm:text-5xl md:text-6xl tracking-tighter leading-[1.1] text-white"
                 >
-                  Contact Us in <br />
-                  <span className="text-white/10 italic">Kovilpatti.</span>
+                  Contact Us 
                 </motion.h2>
               </div>
               <p className="text-white/40 text-sm sm:text-lg font-light leading-relaxed max-w-sm">
-                Ready to transform your business with the best digital marketing agency in Kovilpatti? Let's connect.
+                Ready to transform your business with the best digital marketing agency.
+                 Let's connect.
               </p>
             </motion.div>
 
