@@ -16,8 +16,8 @@ const App: React.FC = () => {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    // Artificial delay to ensure fonts/images are ready for the grand reveal
-    const timer = setTimeout(() => setIsReady(true), 100);
+    // Give the browser more time to settle before the grand reveal
+    const timer = setTimeout(() => setIsReady(true), 600);
     return () => clearTimeout(timer);
   }, []);
 
@@ -37,7 +37,7 @@ const App: React.FC = () => {
   return (
     <>
       <CustomCursor />
-      <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true }}>
+      <ReactLenis root options={{ lerp: 0.12, duration: 1.2, smoothWheel: true }}>
         <ThemeProvider attribute="class" defaultTheme="dark">
           <div className="min-h-screen bg-background text-white relative">
             <Navbar />
@@ -63,10 +63,12 @@ const App: React.FC = () => {
                   <motion.div custom={5} initial="hidden" animate="visible" variants={sectionVariants}>
                     <Contact />
                   </motion.div>
+                  <motion.div custom={6} initial="hidden" animate="visible" variants={sectionVariants}>
+                    <Footer />
+                  </motion.div>
                 </main>
               )}
             </AnimatePresence>
-            <Footer />
           </div>
         </ThemeProvider>
       </ReactLenis>

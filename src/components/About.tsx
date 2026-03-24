@@ -2,7 +2,7 @@ import { useRef, useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
 const About: React.FC = () => {
-  const [counters, setCounters] = useState([0, 0, 0, 0]);
+  const [counters, setCounters] = useState([0, 0, 0]);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -27,7 +27,7 @@ const About: React.FC = () => {
   useEffect(() => {
     if (!isVisible) return;
 
-    const targets = [2, 26, 30, 100];
+    const targets = [2, 26, 100];
     const duration = 2000;
     const steps = 60;
     const interval = duration / steps;
@@ -36,6 +36,7 @@ const About: React.FC = () => {
       setCounters(prev =>
         prev.map((c, i) => {
           const target = targets[i];
+          if (target === undefined) return c;
           const increment = target / steps;
           const next = c + increment;
           return next >= target ? target : next;
@@ -60,7 +61,7 @@ const About: React.FC = () => {
       description: 'High-impact campaigns and creative solutions delivered with precision and passion.',
     },
     {
-      value: Math.round(counters[3]),
+      value: Math.round(counters[2]),
       suffix: '%',
       label: 'Client Happiness',
       description: 'Our commitment to excellence reflected in every partnership and result.',
@@ -93,14 +94,14 @@ const About: React.FC = () => {
           {/* Left Content Column */}
           <div className="flex-1 flex flex-col justify-between py-2 sm:py-4 lg:py-6">
             <div className="space-y-8 md:space-y-10">
-              <div className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className={`transition-all duration-1000 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-medium tracking-tight text-white/40">
                   <span className="size-1.5 rounded-full bg-white animate-pulse" />
                   The Story
                 </span>
               </div>
 
-              <div className={`transition-all duration-1000 delay-100 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className={`transition-all duration-1000 delay-100 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <div className="overflow-hidden">
                   <motion.h2
                     initial={{ y: "100%" }}
@@ -114,7 +115,7 @@ const About: React.FC = () => {
                 </div>
               </div>
 
-              <div className={`transition-all duration-1000 delay-200 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <div className={`transition-all duration-1000 delay-200 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
                 <p className="text-sm sm:text-base text-white/50 leading-relaxed font-light max-w-xl">
                   Welcome to Adora, your dedicated partner in digital transformation. We blend deep strategic insight with fearless creativity to help brands thrive in a complex digital landscape.
                 </p>
@@ -130,7 +131,7 @@ const About: React.FC = () => {
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className={`group relative flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 transition-all duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
+                className={`group relative flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-6 transition-all duration-700 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}
                 style={{ transitionDelay: `${400 + index * 150}ms` }}
               >
                 <div className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tighter text-white tabular-nums leading-none">

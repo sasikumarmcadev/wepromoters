@@ -472,7 +472,7 @@ const OurWork: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div
-          className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}
+          className={`transition-all duration-1000 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}
         >
           <div className="flex flex-col items-start text-left mb-16">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/60 mb-4">
@@ -509,7 +509,7 @@ const OurWork: React.FC = () => {
                         ref={el => setVideoRef(el, videoIndex)}
                         playsInline
                         loop
-                        preload="auto"
+                        preload={isCenterVideo ? "auto" : "metadata"}
                         className="w-full h-full object-cover rounded-xl"
                       >
                         <source src={videos[videoIndex].src} type="video/mp4" />

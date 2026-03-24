@@ -248,18 +248,18 @@ export const ParticlesBackground: React.FC = () => {
         if (window.particlesJS) {
           window.particlesJS('particles-js', {
             "particles": {
-              "number": { "value": 40, "density": { "enable": true, "value_area": 1000 } },
+              "number": { "value": 25, "density": { "enable": true, "value_area": 1200 } },
               "color": { "value": "#ffffff" },
               "shape": { "type": "circle" },
-              "opacity": { "value": 0.1, "random": true, "anim": { "enable": true, "speed": 1.5, "opacity_min": 0.1, "sync": false } },
-              "size": { "value": 6, "random": true },
-              "line_linked": { "enable": true, "distance": 200, "color": "#ffffff", "opacity": 0.2, "width": 1 },
-              "move": { "enable": true, "speed": 3, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
+              "opacity": { "value": 0.08, "random": true, "anim": { "enable": true, "speed": 1.2, "opacity_min": 0.05, "sync": false } },
+              "size": { "value": 4, "random": true },
+              "line_linked": { "enable": true, "distance": 180, "color": "#ffffff", "opacity": 0.15, "width": 1 },
+              "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false }
             },
             "interactivity": {
-              "detect_on": "window",
+              "detect_on": "window", // Keep on window for global tracking but we'll optimize the loop
               "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-              "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+              "modes": { "repulse": { "distance": 120, "duration": 0.4 }, "push": { "particles_nb": 3 } }
             },
             "retina_detect": true
           });
@@ -271,7 +271,7 @@ export const ParticlesBackground: React.FC = () => {
           
           const realMouse = { x: 0, y: 0 };
           const lerpMouse = { x: 0, y: 0 };
-          const lerpFactor = 0.15;
+          const lerpFactor = 0.12;
 
           const updateMousePosition = (e: MouseEvent) => {
             realMouse.x = e.clientX;

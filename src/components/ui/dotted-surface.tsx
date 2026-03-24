@@ -39,9 +39,9 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 	useEffect(() => {
 		if (!containerRef.current) return;
 
-		const SEPARATION = 90;
-		const AMOUNTX = 500;
-		const AMOUNTY = 150;
+		const SEPARATION = 100;
+		const AMOUNTX = 350;
+		const AMOUNTY = 120;
 
 		// Scene setup
 		const scene = new THREE.Scene();
@@ -128,17 +128,17 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 		let count = 0;
 		let animationId = 0;
 
-		// Animation function
 		const animate = () => {
+			if (!isVisibleRef.current) {
+				animationId = requestAnimationFrame(animate);
+				return;
+			}
+			
 			animationId = requestAnimationFrame(animate);
 
-			if (!isVisibleRef.current) return;
-
-			// Update uniforms instead of looping over 270,000 points on the CPU
 			uniforms.uTime.value = count;
-
 			renderer.render(scene, camera);
-			count += 0.1;
+			count += 0.08;
 		};
 
 

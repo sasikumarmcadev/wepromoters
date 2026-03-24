@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState, memo } from 'react';
 import { useMotionValue, useSpring, useTransform, motion } from 'framer-motion';
 import {
   Code2,
@@ -72,7 +72,7 @@ export const services = [
   },
 ];
 
-const ServiceBox = ({ service, index }: { service: Service; index: number }) => {
+const ServiceBox = memo(({ service, index }: { service: Service; index: number }) => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -159,7 +159,7 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
       {/* Icon Area - Top Right with 3D Pop Out */}
       <motion.div
         className={cn(
-          "absolute top-8 right-8 text-white/20 group-hover:text-white/60 transition-colors z-20",
+          "absolute top-8 right-8 text-white/20 group-hover:text-white/60 transition-colors z-20 will-change-transform",
           isHovered && "text-white/60"
         )}
         style={{
@@ -186,7 +186,7 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
 
       {/* Main Content Area with 3D Effect */}
       <motion.div
-        className="relative z-10 flex flex-col h-full justify-end pb-4"
+        className="relative z-10 flex flex-col h-full justify-end pb-4 will-change-transform"
         style={{
           rotateX: rotateXContent,
           rotateY: rotateYContent,
@@ -232,7 +232,7 @@ const ServiceBox = ({ service, index }: { service: Service; index: number }) => 
       )} />
     </motion.div>
   );
-};
+});
 
 const OurServices = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -274,7 +274,7 @@ const OurServices = () => {
       {/* Top Header Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20">
         <div className={cn(
-          "transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col items-end text-right",
+          "transition-all duration-1000 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] flex flex-col items-end text-right",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-16"
         )}>
           <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold tracking-[0.2em] text-white/60 mb-4">

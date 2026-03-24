@@ -57,7 +57,7 @@ const OurClients = () => {
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-8">
-        <div className={`transition-all duration-1000 ease-[cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
+        <div className={`transition-all duration-1000 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)] ${isVisible ? 'transform-none opacity-100' : 'transform translate-y-16 opacity-0'}`}>
           <div className="flex flex-col items-start text-left mb-20">
             <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.08] text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] text-white/60 mb-4">
               <span className="size-1.5 rounded-full bg-white animate-pulse" />

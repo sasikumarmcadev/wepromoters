@@ -48,13 +48,13 @@ export default function CustomCursor() {
         <>
             {/* inner cursor - follows exactly */}
             <motion.div
-                className="hidden md:block fixed top-0 left-0 w-3 h-3 bg-gray-900 dark:bg-white rounded-full pointer-events-none z-[9999]"
+                className="hidden md:block fixed top-0 left-0 w-3 h-3 bg-gray-900 dark:bg-white rounded-full pointer-events-none z-[9999] will-change-transform"
                 style={{ x: cursorX, y: cursorY, translateX: '-50%', translateY: '-50%' }}
             />
 
             {/* outer lagging cursor */}
             <motion.div
-                className="hidden md:block fixed top-0 left-0 w-8 h-8 border border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-full pointer-events-none z-[9998]"
+                className="hidden md:block fixed top-0 left-0 w-8 h-8 border border-gray-900 dark:border-white text-gray-900 dark:text-white rounded-full pointer-events-none z-[9998] will-change-transform"
                 style={{ x: springX, y: springY, translateX: '-50%', translateY: '-50%' }}
                 animate={{
                     scale: isHovered ? 2.5 : 1,
