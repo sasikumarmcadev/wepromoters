@@ -43,7 +43,7 @@ export default function DottedHero() {
 								initial={{ y: "100%" }}
 								animate={{ y: 0 }}
 								transition={{ delay: 0.5, duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
-								className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[-0.04em] text-white uppercase text-center leading-[1.1]"
+								className="text-2xl sm:text-4xl md:text-6xl font-black tracking-[0.05em] text-white uppercase text-center leading-[1.1]"
 							>
 								Digital Marketing Agency
 							</motion.h1>

@@ -59,7 +59,7 @@ export const services = [
   },
   {
     id: 7,
-    title: 'Website & Software Development',
+    title: 'Software Development',
     description: 'We design and develop modern, high-performance websites and software solutions tailored to your business needs. From stunning visuals to seamless functionality, we ensure your digital presence is powerful, user-friendly, and conversion-focused.',
     icon: Code2
   },
@@ -263,6 +263,12 @@ const OurServices = () => {
     >
       <ParticlesBackground />
 
+      {/* Large Background Text */}
+      <div className="absolute top-12 md:top-16 left-0 w-full pointer-events-none select-none overflow-hidden flex justify-end z-0">
+        <h2 className="text-[14vw] md:text-[10vw] lg:text-[8vw] font-black uppercase leading-[0.8] text-white/[0.02] tracking-tighter w-full text-right pr-6 md:pr-0 -mr-[2px] md:mr-0">
+         What We Do
+        </h2>
+      </div>
 
       {/* Top Header Section */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-20">
@@ -281,7 +287,7 @@ const OurServices = () => {
               transition={{ duration: 1.2, ease: [0.23, 1, 0.32, 1] }}
               className="text-3xl sm:text-5xl md:text-6xl font-bold text-white tracking-tighter leading-none"
             >
-              Our <span className="text-white/20">Digital Services.</span>
+              Our <span className="text-white/20"> Services.</span>
             </motion.h2>
           </div>
         </div>
