@@ -97,7 +97,7 @@ const Footer = () => {
         <div className="text-center text-gray-500 mt-12 py-8 border-t border-white/[0.03] relative z-20">
           <div className="footer-animate opacity-0" style={{ animationDelay: '0.8s' }}>
             <p className="text-xs tracking-[0.2em] font-medium text-gray-500">
-              © {currentYear} All rights reserved. <span className="text-gray-700">Developed by <a href="https://www.nextriadsolutions.in" target='_blank' className="hover:text-white transition-colors">Nextriad Solutions</a>.</span>
+              © {currentYear} All rights reserved.
             </p>
           </div>
         </div>
