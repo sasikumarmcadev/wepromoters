@@ -46,7 +46,7 @@ const Footer = () => {
           <div className="footer-animate opacity-0 flex flex-col items-start text-left">
             <div className="flex items-center mb-6">
               <a href="#" onClick={(e) => handleNavClick(e, '#')}> 
-                <img src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png" alt="" className='h-12' />
+                <img src="https://media.hique.in/cdn/cdn-hique/uploads/20261011-035352_adora.webp" alt="Adora Logo" className='h-12' />
               </a>
             </div>
             <p className="text-gray-300 max-w-sm">

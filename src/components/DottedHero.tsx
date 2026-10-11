@@ -31,7 +31,7 @@ export default function DottedHero() {
 						}}
 					>
 						<img
-							src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png"
+							src="https://media.hique.in/cdn/cdn-hique/uploads/20261011-035352_adora.webp"
 							alt="Logo"
 							className="h-12 sm:h-24 md:h-32 w-auto brightness-110 active:scale-95 transition-transform"
 						/>

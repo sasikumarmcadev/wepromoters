@@ -61,7 +61,7 @@ const Navbar = () => {
             onClick={(e) => handleNavClick(e, '#')}
           >
             <img
-              src="https://res.cloudinary.com/dhw6yweku/image/upload/v1756276288/l3kbqtpkrsz2lqshmmmj.png"
+              src="https://media.hique.in/cdn/cdn-hique/uploads/20261011-035352_adora.webp"
               alt="Logo"
               className={cn(
                 "w-auto transition-all duration-1000 [transition-timing-function:cubic-bezier(0.23,1,0.32,1)]",
